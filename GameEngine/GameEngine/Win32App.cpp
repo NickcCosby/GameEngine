@@ -4,6 +4,9 @@ LRESULT Win32App::realWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (msg)
 	{
+	case WM_PAINT:
+		hDC = BeginPaint(mainWindow, &PS);
+		EndPaint(mainWindow, &PS);
 	case WM_CLOSE:
 		DestroyWindow(hwnd);
 		break;
