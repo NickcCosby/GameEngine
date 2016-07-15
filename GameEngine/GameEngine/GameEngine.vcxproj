@@ -110,7 +110,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Actor.h" />
+    <ClInclude Include="Bitmap.h" />
     <ClInclude Include="Main.h" />
+    <ClInclude Include="Showable.h" />
     <ClInclude Include="Win32App.h" />
   </ItemGroup>
   <ItemGroup>
