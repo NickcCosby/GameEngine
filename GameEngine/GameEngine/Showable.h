@@ -4,7 +4,7 @@
 class Showable
 {
 protected:
-	//Bitmap mainImage
+	Bitmap mainImage;
 public:
 	int paint(); //adds image onto back buffer
 };

@@ -1,6 +1,11 @@
 #pragma once
 #include <Windows.h>
 #include <string>
+#include <fstream>
+#include <iterator>
+#include <vector>
+#include <sstream>
+#include <math.h>
 #include "Main.h"
 #include "Win32App.h"
 #include "Actor.h"

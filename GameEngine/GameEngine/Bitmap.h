@@ -4,8 +4,10 @@
 class Bitmap
 {
 private:
-	COLORREF *colors;
+	COLORREF **colors;
+	int width;
+	int height;
 public:
 	COLORREF getColor(int x, int y);
-	Bitmap(int width, int height, std::string location);
+	Bitmap(std::string location);
 };
