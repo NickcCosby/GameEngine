@@ -1,5 +1,10 @@
 #include "Bitmap.h"
 
+COLORREF Bitmap::getColor(int x, int y)
+{
+	return colors[x][y];
+}
+
 Bitmap::Bitmap(std::string location)
 {
 	std::ifstream input("othertest.bmp", std::ios::binary);
