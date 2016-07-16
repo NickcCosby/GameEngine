@@ -6,6 +6,13 @@ LRESULT Win32App::realWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	{
 	case WM_PAINT:
 		hDC = BeginPaint(mainWindow, &PS);
+		for (int ttt = 0; ttt < frontBuffer->getHeight(); ttt++)
+		{
+			for (int nnn = 0; nnn < frontBuffer->getWidth(); nnn++)
+			{
+				SetPixel(hDC, nnn, ttt, frontBuffer->getColor(nnn, ttt));
+			}
+		}
 		EndPaint(mainWindow, &PS);
 	case WM_CLOSE:
 		DestroyWindow(hwnd);
@@ -74,4 +81,10 @@ LRESULT Win32App::WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	if (me == NULL)
 		return DefWindowProc(hwnd, msg, wParam, lParam);
 	me->realWndProc(hwnd, msg, wParam, lParam);
+}
+
+void Win32App::present()
+{
+	frontBuffer = new Bitmap(*backBuffer);
+	delete backBuffer;
 }

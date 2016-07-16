@@ -9,5 +9,13 @@ private:
 	int height;
 public:
 	COLORREF getColor(int x, int y);
+	int getWidth()
+	{
+		return width;
+	}
+	int getHeight()
+	{
+		return height;
+	}
 	Bitmap(std::string location);
 };
