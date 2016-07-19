@@ -2,6 +2,7 @@
 #include "Main.h"
 
 class Bitmap;
+class Showable;
 
 class Win32App
 {
@@ -14,6 +15,10 @@ private:
 	PAINTSTRUCT PS;
 	Bitmap *backBuffer;
 	Bitmap *frontBuffer;
+	int height;
+	int width;
+	Showable ***depthcheck;
+	Showable ** allShowable;
 public:
 	Win32App(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		LPSTR lpCmdLine, int nCmdShow);

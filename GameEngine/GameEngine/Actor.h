@@ -6,8 +6,11 @@ class Bitmap;
 
 class Actor : public Showable
 {
+private:
+	int width;
+	int height;
 	double x;
 	double y;
-	double depth;
-
+public:
+	int paint(Showable ***depthCheck, int screenWidth, int screenHeight);
 };

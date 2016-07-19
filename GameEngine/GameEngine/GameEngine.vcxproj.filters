@@ -41,6 +41,9 @@
     <ClCompile Include="Bitmap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Actor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\..\Desktop\test1.bmp">

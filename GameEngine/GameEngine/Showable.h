@@ -8,6 +8,11 @@ class Showable
 {
 protected:
 	Bitmap *mainImage;
+	double depth;
 public:
-	int paint(); //adds image onto back buffer
+	virtual int paint(Showable ***depthCheck, int width, int height); //adds pointers onto depthCheck array
+	virtual double getDepth()
+	{
+		return depth;
+	}
 };

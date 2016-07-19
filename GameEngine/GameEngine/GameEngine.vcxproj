@@ -117,6 +117,7 @@
     <ClInclude Include="Win32App.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Bitmap.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Win32App.cpp" />
