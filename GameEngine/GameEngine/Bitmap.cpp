@@ -1,4 +1,5 @@
 #include "Bitmap.h"
+#include <iterator>
 
 COLORREF Bitmap::getColor(int x, int y)
 {
@@ -7,21 +8,17 @@ COLORREF Bitmap::getColor(int x, int y)
 
 Bitmap::Bitmap(std::string location)
 {
-	std::ifstream input("othertest.bmp", std::ios::binary);
+	std::ifstream input(location, std::ios::binary);
 	// copies all data into buffer
-	std::vector<char> vectorBuffer((
-		std::istreambuf_iterator<char>(input)),
-		(std::istreambuf_iterator<char>()));
-	std::stringstream ss;
+	std::vector<UINT> vectorBuffer((std::istreambuf_iterator<char>(input)), (std::istreambuf_iterator<char>()));
+	UINT *fileContent = new UINT[vectorBuffer.size()];
 	for (int iii = 0; iii < vectorBuffer.size(); iii++)
 	{
-		ss << std::hex << (int)vectorBuffer[iii];
-	}
-	std::string buffer = ss.str();
-	int *fileContent = new int[buffer.size() / 2];
-	for (int iii = 0; iii < buffer.size() / 2; iii++)
-	{
-		fileContent[iii] = strtoul(buffer.substr(iii*2, 2).c_str(), NULL, 16);
+		fileContent[iii] = (UINT)vectorBuffer[iii];
+		if (fileContent[iii] > 255)
+		{
+			fileContent[iii] -= 4294967040;
+		}
 	}
 	width = (fileContent[18]+fileContent[19]*pow(16, 2)+ fileContent[20]*pow(16,4) + fileContent[21]*pow(16,6));
 	height = (fileContent[22] + fileContent[23] * pow(16, 2) + fileContent[24] * pow(16, 4) + fileContent[25] * pow(16, 6));
@@ -29,16 +26,16 @@ Bitmap::Bitmap(std::string location)
 	for (int i = 0; i < width; ++i) {
 		colors[i] = new COLORREF[height];
 	}
-	int location = (fileContent[10] + fileContent[11] * pow(16, 2) + fileContent[12] * pow(16, 4) + fileContent[13] * pow(16, 6));
+	int colorsLocation = (fileContent[10] + fileContent[11] * pow(16, 2) + fileContent[12] * pow(16, 4) + fileContent[13] * pow(16, 6));
 	int tempRed;
 	int tempBlue;
 	int tempGreen;
 	int tempLocation;
-	for (int bbb = height; bbb < height; bbb--)
+	for (int bbb = height; bbb >= 0; bbb--)
 	{
 		for (int aaa = 0; aaa < width; aaa++)
 		{
-			tempLocation = (aaa + (height - bbb)*width)*3;
+			tempLocation = (((aaa + (height - bbb)*width)*3) + colorsLocation);
 			tempBlue = fileContent[tempLocation];
 			tempGreen = fileContent[tempLocation + 1];
 			tempRed = fileContent[tempLocation + 2];

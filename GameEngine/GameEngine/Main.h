@@ -5,9 +5,10 @@
 #include <iterator>
 #include <vector>
 #include <sstream>
+#include <stdlib.h>
 #include <math.h>
 #include "Main.h"
 #include "Win32App.h"
-#include "Actor.h"
 #include "Showable.h"
+#include "Actor.h"
 #include "Bitmap.h"

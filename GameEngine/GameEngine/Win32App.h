@@ -1,6 +1,8 @@
 #pragma once
 #include "Main.h"
 
+class Bitmap;
+
 class Win32App
 {
 private:

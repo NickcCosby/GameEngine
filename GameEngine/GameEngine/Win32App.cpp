@@ -5,15 +5,19 @@ LRESULT Win32App::realWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	switch (msg)
 	{
 	case WM_PAINT:
-		hDC = BeginPaint(mainWindow, &PS);
-		for (int ttt = 0; ttt < frontBuffer->getHeight(); ttt++)
+		if (frontBuffer != NULL)
 		{
-			for (int nnn = 0; nnn < frontBuffer->getWidth(); nnn++)
+			hDC = BeginPaint(mainWindow, &PS);
+			for (int ttt = 0; ttt < frontBuffer->getHeight(); ttt++)
 			{
-				SetPixel(hDC, nnn, ttt, frontBuffer->getColor(nnn, ttt));
+				for (int nnn = 0; nnn < frontBuffer->getWidth(); nnn++)
+				{
+					SetPixel(hDC, nnn, ttt, frontBuffer->getColor(nnn, ttt));
+				}
 			}
+			EndPaint(mainWindow, &PS);
 		}
-		EndPaint(mainWindow, &PS);
+		break;
 	case WM_CLOSE:
 		DestroyWindow(hwnd);
 		break;
@@ -58,6 +62,8 @@ Win32App::Win32App(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		CW_USEDEFAULT, CW_USEDEFAULT, 240, 120,
 		NULL, NULL, hInstance, NULL);
 	SetWindowLongPtr(mainWindow, GWLP_USERDATA,LONG(this));
+	backBuffer = new Bitmap("test1.bmp");
+	present();
 	if (mainWindow == NULL)
 	{
 		MessageBox(NULL, "Window Creation Failed!", "Error!",
