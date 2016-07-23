@@ -4,5 +4,5 @@
 class Pawn : Actor
 {
 public:
-	void inputReact()
+	void inputReact();
 };
