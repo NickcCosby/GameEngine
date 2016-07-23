@@ -12,5 +12,6 @@ private:
 	double x;
 	double y;
 public:
-	int paint(Showable ***depthCheck, int screenWidth, int screenHeight);
+	int paint(Showable ***backBuffer, int screenWidth, int screenHeight);
+	COLORREF getColor(int globalX, int globalY);
 };

@@ -5,14 +5,15 @@ LRESULT Win32App::realWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	switch (msg)
 	{
 	case WM_PAINT:
-		if (frontBuffer != NULL)
+		gameState->present();
+		if (gameState->getFrontBuffer() != NULL)
 		{
 			hDC = BeginPaint(mainWindow, &PS);
-			for (int ttt = 0; ttt < frontBuffer->getHeight(); ttt++)
+			for (int ttt = 0; ttt < height; ttt++)
 			{
-				for (int nnn = 0; nnn < frontBuffer->getWidth(); nnn++)
+				for (int nnn = 0; nnn < width; nnn++)
 				{
-					SetPixel(hDC, nnn, ttt, frontBuffer->getColor(nnn, ttt));
+					SetPixel(hDC, nnn, ttt, gameState->getFrontBuffer->getColor(nnn, ttt));
 				}
 			}
 			EndPaint(mainWindow, &PS);
@@ -62,8 +63,6 @@ Win32App::Win32App(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		CW_USEDEFAULT, CW_USEDEFAULT, 240, 120,
 		NULL, NULL, hInstance, NULL);
 	SetWindowLongPtr(mainWindow, GWLP_USERDATA,LONG(this));
-	backBuffer = new Bitmap("test1.bmp");
-	present();
 	if (mainWindow == NULL)
 	{
 		MessageBox(NULL, "Window Creation Failed!", "Error!",
@@ -89,8 +88,3 @@ LRESULT Win32App::WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	me->realWndProc(hwnd, msg, wParam, lParam);
 }
 
-void Win32App::present()
-{
-	frontBuffer = new Bitmap(*backBuffer);
-	delete backBuffer;
-}

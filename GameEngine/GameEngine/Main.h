@@ -7,8 +7,10 @@
 #include <sstream>
 #include <stdlib.h>
 #include <math.h>
-#include "Main.h"
 #include "Win32App.h"
+#include "GameState.h"
 #include "Showable.h"
 #include "Actor.h"
+#include "Pawn.h"
 #include "Bitmap.h"
+

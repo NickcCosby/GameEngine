@@ -10,9 +10,10 @@ protected:
 	Bitmap *mainImage;
 	double depth;
 public:
-	virtual int paint(Showable ***depthCheck, int width, int height); //adds pointers onto depthCheck array
+	virtual int paint(Showable ***backBuffer, int width, int height); //adds pointers onto depthCheck array
 	virtual double getDepth()
 	{
 		return depth;
 	}
+	virtual COLORREF getColor(int globalX, int globalY);
 };

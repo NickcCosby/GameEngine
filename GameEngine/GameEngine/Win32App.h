@@ -13,15 +13,11 @@ private:
 	LRESULT realWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 	HDC hDC;
 	PAINTSTRUCT PS;
-	Bitmap *backBuffer;
-	Bitmap *frontBuffer;
-	int height;
+	GameState *gameState;
 	int width;
-	Showable ***depthcheck;
-	Showable ** allShowable;
+	int height;
 public:
 	Win32App(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		LPSTR lpCmdLine, int nCmdShow);
 	static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
-	void present(); //swaps backBuffer to front buffer
 };

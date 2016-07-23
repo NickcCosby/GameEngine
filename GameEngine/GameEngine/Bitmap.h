@@ -18,4 +18,6 @@ public:
 		return height;
 	}
 	Bitmap(std::string location);
+	Bitmap(int width, int height);
+	void setPixelColor(COLORREF tempColor, int x, int y);
 };
