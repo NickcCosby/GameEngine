@@ -12,7 +12,7 @@ Bitmap::Bitmap(std::string location)
 	// copies all data into buffer
 	std::vector<UINT> vectorBuffer((std::istreambuf_iterator<char>(input)), (std::istreambuf_iterator<char>()));
 	UINT *fileContent = new UINT[vectorBuffer.size()];
-	for (int iii = 0; iii < vectorBuffer.size(); iii++)
+	for (UINT iii = 0; iii < vectorBuffer.size(); iii++)
 	{
 		fileContent[iii] = (UINT)vectorBuffer[iii];
 		if (fileContent[iii] > 255)

@@ -29,3 +29,9 @@ COLORREF Actor::getColor(int globalX, int globalY)
 	bitmapY = globalY - y;
 	return mainImage->getColor(bitmapX, bitmapY);
 }
+
+void Actor::update()
+{
+	x += velocityX;
+	y += velocityY;
+}

@@ -1,8 +1,9 @@
 #pragma once
-#include "main.h"
+#include "Main.h"
 
-class Pawn : Actor
+class Pawn : public Actor
 {
 public:
-	void inputReact();
+	Pawn(int startX, int startY, Bitmap *allSprites, Showable **&allShowable, int &showableLength);
+	void inputReact(char input);
 };

@@ -13,10 +13,32 @@ LRESULT Win32App::realWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			{
 				for (int nnn = 0; nnn < width; nnn++)
 				{
-					SetPixel(hDC, nnn, ttt, gameState->getFrontBuffer->getColor(nnn, ttt));
+					SetPixel(hDC, nnn, ttt, gameState->getFrontBuffer()->getColor(nnn, ttt));
 				}
 			}
 			EndPaint(mainWindow, &PS);
+		}
+		break;
+	case WM_KEYDOWN:
+		KeyState ks;
+		ks.lparam = lParam;
+		if (ks.nPrev = 0)
+		{
+			switch (wParam)
+			{
+			case 0x57:
+				gameState->getPlayer()->inputReact('w');
+				break;
+			case 0x53:
+				gameState->getPlayer()->inputReact('s');
+				break;
+			case 0x41:
+				gameState->getPlayer()->inputReact('a');
+				break;
+			case 0x44:
+				gameState->getPlayer()->inputReact('d');
+				break;
+			}
 		}
 		break;
 	case WM_CLOSE:
@@ -34,6 +56,9 @@ LRESULT Win32App::realWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 Win32App::Win32App(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	LPSTR lpCmdLine, int nCmdShow)
 {
+	width = 500;
+	height = 500;
+	gameState = new GameState(width, height);
 	//Step 1: Registering the Window Class
 	wc.cbSize = sizeof(WNDCLASSEX);
 	wc.style = 0;
@@ -60,7 +85,7 @@ Win32App::Win32App(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		"mainWindow",
 		"The title of my window",
 		WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, CW_USEDEFAULT, 240, 120,
+		CW_USEDEFAULT, CW_USEDEFAULT, 500, 500,
 		NULL, NULL, hInstance, NULL);
 	SetWindowLongPtr(mainWindow, GWLP_USERDATA,LONG(this));
 	if (mainWindow == NULL)

@@ -3,7 +3,7 @@
 
 class Bitmap;
 class Showable;
-
+class GameState;
 class Win32App
 {
 private:
