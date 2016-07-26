@@ -56,6 +56,14 @@ Bitmap::Bitmap(int givenWidth, int givenHeight)
 	}
 }
 
+Bitmap::~Bitmap()
+{
+	for (int iii = 0; iii < width; iii++)
+	{
+			delete[] colors[iii];
+	}
+}
+
 void Bitmap::setPixelColor(COLORREF tempColor, int x, int y)
 {
 	colors[x][y] = tempColor;

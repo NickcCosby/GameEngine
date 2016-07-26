@@ -5,8 +5,6 @@ class Bitmap;
 class Actor : public Showable
 {
 protected:
-	int width;
-	int height;
 	int x;
 	int y;
 	int velocityX;
@@ -19,6 +17,10 @@ public:
 	int paint(Showable ***backBuffer, int screenWidth, int screenHeight);
 	COLORREF getColor(int globalX, int globalY);
 	void update();
+	~Actor()
+	{
+		delete mainImage;
+	}
 };
 
 #include "Pawn.h"

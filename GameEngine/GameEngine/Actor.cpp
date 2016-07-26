@@ -2,11 +2,11 @@
 
 int Actor::paint(Showable *** backBuffer, int screenWidth, int screenHeight)
 {
-	for (int iii = y; iii < height+y && y+iii < screenHeight; iii++)
+	for (int iii = y; iii < mainImage->getHeight()+y && iii < screenHeight; iii++)
 	{
-		for (int bbb = x; bbb < width+x && x+bbb < screenWidth; bbb++)
+		for (int bbb = x; bbb < mainImage->getWidth()+x && bbb < screenWidth; bbb++)
 		{
-			if (mainImage->getColor(bbb, iii) != NULL)
+			if (mainImage->getColor(bbb-x, iii-y) != NULL)
 			{
 				if (backBuffer[bbb][iii] == NULL)
 					backBuffer[bbb][iii] = this;

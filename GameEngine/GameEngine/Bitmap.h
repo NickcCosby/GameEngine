@@ -19,5 +19,6 @@ public:
 	}
 	Bitmap(std::string location);
 	Bitmap(int width, int height);
+	~Bitmap();
 	void setPixelColor(COLORREF tempColor, int x, int y);
 };

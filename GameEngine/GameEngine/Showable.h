@@ -21,6 +21,10 @@ public:
 	}
 	virtual COLORREF getColor(int globalX, int globalY) = 0;
 	virtual void update() = 0;
+	~Showable()
+	{
+		delete mainImage;
+	}
 };
 
 #include "Actor.h"

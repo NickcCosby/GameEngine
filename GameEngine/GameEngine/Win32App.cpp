@@ -18,11 +18,12 @@ LRESULT Win32App::realWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			}
 			EndPaint(mainWindow, &PS);
 		}
+		delete gameState->getFrontBuffer();
 		break;
 	case WM_KEYDOWN:
 		KeyState ks;
 		ks.lparam = lParam;
-		if (ks.nPrev = 0)
+		if (ks.nPrev == 0)
 		{
 			switch (wParam)
 			{
@@ -40,6 +41,10 @@ LRESULT Win32App::realWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 				break;
 			}
 		}
+		break;
+	case WM_TIMER:
+		SendMessage(hwnd, WM_PAINT, NULL, NULL);
+		SetTimer(hwnd, NULL, 10, NULL);
 		break;
 	case WM_CLOSE:
 		DestroyWindow(hwnd);
@@ -96,7 +101,7 @@ Win32App::Win32App(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 	ShowWindow(mainWindow, nCmdShow);
 	UpdateWindow(mainWindow);
-
+	SetTimer(mainWindow, NULL, 10, NULL);
 	// Step 3: The Message Loop
 	while (GetMessage(&Msg, NULL, 0, 0) > 0)
 	{

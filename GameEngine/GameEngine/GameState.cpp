@@ -9,6 +9,13 @@ GameState::GameState(int givenWidth, int givenHeight)
 	{
 		backBuffer[i] = new Showable*[height];
 	}
+	for (int aaa = 0; aaa < height; aaa++)
+	{
+		for (int bbb = 0; bbb < width; bbb++)
+		{
+			backBuffer[bbb][aaa] = NULL;
+		}
+	}
 	allShowable = new Showable*[100];
 	showableLength = 0;
 	allSprites = new Bitmap("ship1.bmp");
@@ -19,6 +26,7 @@ void GameState::present()
 {
 	for (int aaa = 0; aaa < showableLength; aaa++)
 	{
+		allShowable[aaa]->update();
 		allShowable[aaa]->paint(backBuffer, width, height);
 	}
 	frontBuffer = new Bitmap(width, height);
@@ -32,10 +40,11 @@ void GameState::present()
 			}
 		}
 	}
-	delete[] backBuffer;
-	backBuffer = new Showable**[width];
-	for (int i = 0; i < width; ++i)
+	for (int aaa = 0; aaa < height; aaa++)
 	{
-		backBuffer[i] = new Showable*[height];
+		for (int bbb = 0; bbb < width; bbb++)
+		{
+			backBuffer[bbb][aaa] = NULL;
+		}
 	}
 }
