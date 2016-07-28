@@ -1,7 +1,7 @@
 #include "Bitmap.h"
 #include <iterator>
 
-COLORREF Bitmap::getColor(int x, int y)
+pixel Bitmap::getColor(int x, int y)
 {
 	return colors[x][y];
 }
@@ -22,10 +22,10 @@ Bitmap::Bitmap(std::string location)
 	}
 	width = (fileContent[18]+fileContent[19]*pow(16, 2)+ fileContent[20]*pow(16,4) + fileContent[21]*pow(16,6));
 	height = (fileContent[22] + fileContent[23] * pow(16, 2) + fileContent[24] * pow(16, 4) + fileContent[25] * pow(16, 6));
-	colors = new COLORREF*[width];
+	colors = new pixel*[width];
 	for (int i = 0; i < width; ++i)
 	{
-		colors[i] = new COLORREF[height];
+		colors[i] = new pixel[height];
 	}
 	int colorsLocation = (fileContent[10] + fileContent[11] * pow(16, 2) + fileContent[12] * pow(16, 4) + fileContent[13] * pow(16, 6));
 	int tempRed;
@@ -37,10 +37,9 @@ Bitmap::Bitmap(std::string location)
 		for (int aaa = 0; aaa < width; aaa++)
 		{
 			tempLocation = (((aaa + (height - bbb)*width)*3) + colorsLocation);
-			tempBlue = fileContent[tempLocation];
-			tempGreen = fileContent[tempLocation + 1];
-			tempRed = fileContent[tempLocation + 2];
-			colors[aaa][bbb] = RGB(tempRed, tempBlue, tempGreen);
+			colors[aaa][bbb].b = fileContent[tempLocation];
+			colors[aaa][bbb].g = fileContent[tempLocation + 1];
+			colors[aaa][bbb].r = fileContent[tempLocation + 2];
 		}
 	}
 }
@@ -49,10 +48,10 @@ Bitmap::Bitmap(int givenWidth, int givenHeight)
 {
 	width = givenWidth;
 	height = givenHeight;
-	colors = new COLORREF*[width];
+	colors = new pixel*[width];
 	for (int i = 0; i < width; ++i)
 	{
-		colors[i] = new COLORREF[height];
+		colors[i] = new pixel[height];
 	}
 }
 
@@ -64,7 +63,7 @@ Bitmap::~Bitmap()
 	}
 }
 
-void Bitmap::setPixelColor(COLORREF tempColor, int x, int y)
+void Bitmap::setPixelColor(pixel tempColor, int x, int y)
 {
 	colors[x][y] = tempColor;
 }

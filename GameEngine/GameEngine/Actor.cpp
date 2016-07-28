@@ -6,22 +6,19 @@ int Actor::paint(Showable *** backBuffer, int screenWidth, int screenHeight)
 	{
 		for (int bbb = x; bbb < mainImage->getWidth()+x && bbb < screenWidth; bbb++)
 		{
-			if (mainImage->getColor(bbb-x, iii-y) != NULL)
-			{
-				if (backBuffer[bbb][iii] == NULL)
+			if (backBuffer[bbb][iii] == NULL)
 					backBuffer[bbb][iii] = this;
 				else
 				{
 					if (backBuffer[bbb][iii]->getDepth() < depth)
 						backBuffer[bbb][iii] = this;
 				}
-			}
 		}
 	}
 	return 0;
 }
 
-COLORREF Actor::getColor(int globalX, int globalY)
+pixel Actor::getColor(int globalX, int globalY)
 {
 	int bitmapX;
 	int bitmapY;

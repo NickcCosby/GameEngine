@@ -1,6 +1,6 @@
 #include "GameState.h"
 
-GameState::GameState(int givenWidth, int givenHeight)
+GameState::GameState(int givenWidth, int givenHeight, HWND hwnd)
 {
 	width = givenWidth;
 	height = givenHeight;
@@ -20,6 +20,26 @@ GameState::GameState(int givenWidth, int givenHeight)
 	showableLength = 0;
 	allSprites = new Bitmap("ship1.bmp");
 	Player = new Pawn(width/2, height/2, allSprites, allShowable, showableLength);
+	BITMAPINFO bmi;
+	bmi.bmiHeader.biSize = sizeof(BITMAPINFO);
+	bmi.bmiHeader.biWidth = width;
+	bmi.bmiHeader.biHeight = -height; // Order pixels from top to bottom
+	bmi.bmiHeader.biPlanes = 1;
+	bmi.bmiHeader.biBitCount = 32; // last byte not used, 32 bit for alignment
+	bmi.bmiHeader.biCompression = BI_RGB;
+	bmi.bmiHeader.biSizeImage = 0;
+	bmi.bmiHeader.biXPelsPerMeter = 0;
+	bmi.bmiHeader.biYPelsPerMeter = 0;
+	bmi.bmiHeader.biClrUsed = 0;
+	bmi.bmiHeader.biClrImportant = 0;
+	bmi.bmiColors[0].rgbBlue = 0;
+	bmi.bmiColors[0].rgbGreen = 0;
+	bmi.bmiColors[0].rgbRed = 0;
+	bmi.bmiColors[0].rgbReserved = 0;
+	HDC hdc = GetDC(hwnd);
+	// Create DIB section to always give direct access to pixels
+	hbmp = CreateDIBSection(hdc, &bmi, DIB_RGB_COLORS, (void**)&frontBuffer, NULL, 0);
+	DeleteDC(hdc);
 }
 
 void GameState::present()
@@ -29,22 +49,25 @@ void GameState::present()
 		allShowable[aaa]->update();
 		allShowable[aaa]->paint(backBuffer, width, height);
 	}
-	frontBuffer = new Bitmap(width, height);
-	for (int bbb = 0; bbb < height; bbb++)
+	pixel *temp;
+	for (int heightCur = 0; heightCur < height; heightCur++)
 	{
-		for (int ccc = 0; ccc < width; ccc++)
+		for (int widthCur = 0; widthCur < width; widthCur++)
 		{
-			if (backBuffer[ccc][bbb] != NULL)
+			if (backBuffer[heightCur][widthCur] != NULL)
 			{
-				frontBuffer->setPixelColor(backBuffer[ccc][bbb]->getColor(ccc, bbb), ccc, bbb);
+				temp = &frontBuffer[heightCur*width + widthCur];
+				temp->b = backBuffer[heightCur][widthCur]->getColor(heightCur, widthCur).b;
+				temp->g = backBuffer[heightCur][widthCur]->getColor(heightCur, widthCur).g;
+				temp->r = backBuffer[heightCur][widthCur]->getColor(heightCur, widthCur).r;
 			}
 		}
 	}
-	for (int aaa = 0; aaa < height; aaa++)
+	for (int zzz = 0; zzz < height; zzz++)
 	{
-		for (int bbb = 0; bbb < width; bbb++)
+		for (int xxx = 0; xxx < width; xxx++)
 		{
-			backBuffer[bbb][aaa] = NULL;
+			backBuffer[xxx][zzz] = NULL;
 		}
 	}
 }

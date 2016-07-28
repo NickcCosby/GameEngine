@@ -19,7 +19,7 @@ public:
 	{
 		return isDead;
 	}
-	virtual COLORREF getColor(int globalX, int globalY) = 0;
+	virtual pixel getColor(int globalX, int globalY) = 0;
 	virtual void update() = 0;
 	~Showable()
 	{

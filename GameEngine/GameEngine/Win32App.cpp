@@ -1,10 +1,37 @@
 #include "Win32App.h"
 
+DWORD WINAPI tickThreadProc(LPVOID lpParameter)
+{
+	Win32App *me = (Win32App*)lpParameter;
+	// Give plenty of time for main thread to finish setting up
+	Sleep(50);
+	ShowWindow(me->getMainWindow(), SW_SHOW);
+	// Retrieve the window's DC
+	HDC hdc = GetDC(me->getMainWindow());
+	// Create DC with shared pixels to variable 'pixels'
+	me->setHDCMem(CreateCompatibleDC(hdc));
+	HBITMAP hbmOld = (HBITMAP)SelectObject(me->getHDCMem(), me->getGameState()->getHbmp());
+	// Milliseconds to wait each frame
+	int delay = 1000 / 60;
+	while (true)
+	{
+		// Do stuff with pixels
+		me->getGameState()->present();
+		// Draw pixels to window
+		BitBlt(hdc, 0, 0, me->getWidth(), me->getHeight(), me->getHDCMem(), 0, 0, SRCCOPY);
+		// Wait
+		Sleep(delay);
+	}
+	SelectObject(me->getHDCMem(), hbmOld);
+	DeleteDC(hdc);
+}
+
 LRESULT Win32App::realWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (msg)
 	{
 	case WM_PAINT:
+		/*
 		gameState->present();
 		if (gameState->getFrontBuffer() != NULL)
 		{
@@ -19,6 +46,11 @@ LRESULT Win32App::realWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			EndPaint(mainWindow, &PS);
 		}
 		delete gameState->getFrontBuffer();
+		*/
+		hDC = BeginPaint(hwnd, &PS);
+		// Draw pixels to window when window needs repainting
+		BitBlt(hDC, 0, 0, width, height, hDCMem, 0, 0, SRCCOPY);
+		EndPaint(hwnd, &PS);
 		break;
 	case WM_KEYDOWN:
 		KeyState ks;
@@ -43,7 +75,8 @@ LRESULT Win32App::realWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		}
 		break;
 	case WM_TIMER:
-		SendMessage(hwnd, WM_PAINT, NULL, NULL);
+		UpdateWindow(hwnd);
+		ShowWindow(hwnd, 5);
 		SetTimer(hwnd, NULL, 10, NULL);
 		break;
 	case WM_CLOSE:
@@ -63,7 +96,7 @@ Win32App::Win32App(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 {
 	width = 500;
 	height = 500;
-	gameState = new GameState(width, height);
+	gameState = new GameState(width, height, mainWindow);
 	//Step 1: Registering the Window Class
 	wc.cbSize = sizeof(WNDCLASSEX);
 	wc.style = 0;
@@ -99,9 +132,8 @@ Win32App::Win32App(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 			MB_ICONEXCLAMATION | MB_OK);
 	}
 
-	ShowWindow(mainWindow, nCmdShow);
 	UpdateWindow(mainWindow);
-	SetTimer(mainWindow, NULL, 10, NULL);
+	hTickThread = CreateThread(NULL, NULL, &tickThreadProc, this, NULL, NULL);
 	// Step 3: The Message Loop
 	while (GetMessage(&Msg, NULL, 0, 0) > 0)
 	{

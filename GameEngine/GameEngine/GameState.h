@@ -7,7 +7,8 @@ class Pawn;
 class GameState
 {
 private:
-	Bitmap *frontBuffer;
+	//Bitmap *frontBuffer;
+	pixel *frontBuffer;
 	Bitmap *allSprites;
 	int height;
 	int width;
@@ -15,6 +16,7 @@ private:
 	Showable ** allShowable;
 	Pawn *Player;
 	int showableLength;
+	HBITMAP hbmp;
 public:
 	Pawn *getPlayer()
 	{
@@ -22,7 +24,7 @@ public:
 	}
 	Bitmap *getFrontBuffer()
 	{
-		return frontBuffer;
+		//return frontBuffer;
 	}
 	Showable *** getBackBuffer()
 	{
@@ -36,7 +38,11 @@ public:
 	{
 		return showableLength;
 	}
-	GameState(int givenWidth, int givenHeight);
+	HBITMAP getHbmp()
+	{
+		return hbmp;
+	}
+	GameState(int givenWidth, int givenHeight, HWND hwnd);
 	void present();
 	void cleanUp();
 };

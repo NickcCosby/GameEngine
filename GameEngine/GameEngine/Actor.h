@@ -15,7 +15,7 @@ protected:
 	*/
 public:
 	int paint(Showable ***backBuffer, int screenWidth, int screenHeight);
-	COLORREF getColor(int globalX, int globalY);
+	pixel getColor(int globalX, int globalY);
 	void update();
 	~Actor()
 	{

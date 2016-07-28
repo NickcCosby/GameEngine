@@ -1,4 +1,16 @@
 #pragma once
+struct pixel {
+	union {
+		struct {
+			unsigned char b, g, r, a;
+		};
+		int val;
+	};
+	pixel() {
+		val = 0;
+	}
+};
+
 #include <Windows.h>
 #include <string>
 #include <fstream>
@@ -27,3 +39,4 @@ union KeyState
 		unsigned nTrans : 1;
 	};
 };
+

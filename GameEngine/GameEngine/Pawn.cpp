@@ -14,20 +14,20 @@ void Pawn::inputReact(char input)
 	switch (input)
 	{
 	case 'w':
-		velocityY = 100;
+		velocityY = -5;
 		velocityX = 0;
 		break;
 	case 's':
-		velocityY = -100;
+		velocityY = 10;
 		velocityX = 0;
 		break;
 	case 'a':
 		velocityY = 0;
-		velocityX = -100;
+		velocityX = -10;
 		break;
 	case 'd':
 		velocityY = 0;
-		velocityX = 100;
+		velocityX = 10;
 		break;
 	}
 }

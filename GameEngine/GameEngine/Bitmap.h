@@ -4,11 +4,11 @@
 class Bitmap
 {
 private:
-	COLORREF **colors;
+	pixel **colors;
 	int width;
 	int height;
 public:
-	COLORREF getColor(int x, int y);
+	pixel getColor(int x, int y);
 	int getWidth()
 	{
 		return width;
@@ -20,5 +20,5 @@ public:
 	Bitmap(std::string location);
 	Bitmap(int width, int height);
 	~Bitmap();
-	void setPixelColor(COLORREF tempColor, int x, int y);
+	void setPixelColor(pixel tempColor, int x, int y);
 };
