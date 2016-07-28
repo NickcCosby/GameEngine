@@ -40,6 +40,7 @@ GameState::GameState(int givenWidth, int givenHeight, HWND hwnd)
 	// Create DIB section to always give direct access to pixels
 	hbmp = CreateDIBSection(hdc, &bmi, DIB_RGB_COLORS, (void**)&frontBuffer, NULL, 0);
 	DeleteDC(hdc);
+	cleanUp();
 }
 
 void GameState::present()
@@ -70,4 +71,24 @@ void GameState::present()
 			backBuffer[xxx][zzz] = NULL;
 		}
 	}
+}
+
+void GameState::cleanUp()
+{
+	Showable **tempArray;
+	tempArray = new Showable*[100];
+	for (int aaa = 0; aaa < showableLength; aaa++)
+	{
+		if (allShowable[aaa]->getIsDead() == true)
+		{
+			showableLength--;
+			delete allShowable[aaa];
+		}
+		else
+		{
+			tempArray[aaa] = allShowable[aaa];
+		}
+	}
+	delete allShowable;
+	allShowable = tempArray;
 }

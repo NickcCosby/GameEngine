@@ -14,7 +14,7 @@ void Pawn::inputReact(char input)
 	switch (input)
 	{
 	case 'w':
-		velocityY = -5;
+		velocityY = -1;
 		velocityX = 0;
 		break;
 	case 's':
