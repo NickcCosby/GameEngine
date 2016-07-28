@@ -1,0 +1,1 @@
+This project is intended to create a generalized game engine with OOD and display handling using GDI.
