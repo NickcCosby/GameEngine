@@ -1,7 +1,7 @@
 #include "Bitmap.h"
 #include <iterator>
 
-pixel Bitmap::getColor(int x, int y)
+inline pixel Bitmap::getColor(int x, int y)
 {
 	return colors[x][y];
 }
@@ -66,4 +66,20 @@ Bitmap::~Bitmap()
 void Bitmap::setPixelColor(pixel tempColor, int x, int y)
 {
 	colors[x][y] = tempColor;
+}
+
+Bitmap* Bitmap::createSubBitmap(RECT space)
+{
+	int width, height;
+	height = space.bottom - space.top;
+	width = space.right - space.left;
+	Bitmap *tempBitmap = new Bitmap(width, height);
+	for (int curHeight = space.top; curHeight <= space.bottom; curHeight++)
+	{
+		for (int curWidth = space.left; curWidth <= space.right; curWidth++)
+		{
+			tempBitmap->setPixelColor(this->getColor(curWidth, curHeight), curWidth - space.left, curHeight - space.top);
+		}
+	}
+	return tempBitmap;
 }

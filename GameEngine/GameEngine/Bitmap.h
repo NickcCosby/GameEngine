@@ -8,7 +8,7 @@ private:
 	int width;
 	int height;
 public:
-	pixel getColor(int x, int y);
+	inline pixel getColor(int x, int y);
 	int getWidth()
 	{
 		return width;
@@ -21,4 +21,5 @@ public:
 	Bitmap(int width, int height);
 	~Bitmap();
 	void setPixelColor(pixel tempColor, int x, int y);
+	Bitmap* createSubBitmap(RECT space);
 };
