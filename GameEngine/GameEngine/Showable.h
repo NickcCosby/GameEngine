@@ -28,3 +28,4 @@ public:
 };
 
 #include "Actor.h"
+#include "Background.h"

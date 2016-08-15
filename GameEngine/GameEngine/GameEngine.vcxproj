@@ -113,6 +113,7 @@
     <ClInclude Include="Actor.h" />
     <ClInclude Include="Bitmap.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="Background.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="Pawn.h" />
     <ClInclude Include="Showable.h" />
@@ -120,6 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="Background.cpp" />
     <ClCompile Include="Bitmap.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Main.cpp" />
