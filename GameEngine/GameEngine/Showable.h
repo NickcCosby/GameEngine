@@ -12,7 +12,7 @@ protected:
 	int screenWidth;
 	int screenHeight;
 public:
-	virtual int paint(Showable ***backBuffer, int width, int height) = 0; //adds pointers onto depthCheck array
+	virtual int paint(Showable ***backBuffer) = 0; //adds pointers onto depthCheck array
 	virtual double getDepth()
 	{
 		return depth;
@@ -27,7 +27,7 @@ public:
 	{
 		delete mainImage;
 	}
-	Showable(Showable ** allShowable, int &showableLength);
+	Showable(Showable ** allShowable, int &showableLength, int width, int height);
 };
 
 #include "Actor.h"

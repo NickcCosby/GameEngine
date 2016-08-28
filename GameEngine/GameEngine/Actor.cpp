@@ -1,12 +1,12 @@
 #include "Actor.h"
 
-Actor::Actor(int startX, int startY, Showable **& allShowable, int & showableLength) : Showable(allShowable, showableLength)
+Actor::Actor(int startX, int startY, Showable **& allShowable, int & showableLength, int width, int height) : Showable(allShowable, showableLength, width, height)
 {
 	x = startX;
 	y = startY;
 }
 
-int Actor::paint(Showable *** backBuffer, int screenWidth, int screenHeight)
+int Actor::paint(Showable *** backBuffer)
 {
 	for (int iii = y; iii < mainImage->getHeight()+y && iii < screenHeight; iii++)
 	{
@@ -35,6 +35,28 @@ pixel Actor::getColor(int globalX, int globalY)
 
 void Actor::update()
 {
-	x += velocityX;
-	y += velocityY;
+	if (x+velocityX >= 0 && x+velocityX+mainImage->getWidth() < screenWidth)
+	{
+		x += velocityX;
+	}
+	else if (x + velocityX + mainImage->getWidth() > screenWidth)
+	{
+		x = screenWidth - mainImage->getWidth() - 1;
+	}
+	else if(x + velocityX <= 0)
+	{
+		x = 1;
+	}
+	if (y + velocityY >= 0 && y + velocityY + mainImage->getHeight() < screenHeight)
+	{
+		y += velocityY;
+	}
+	else if (y + velocityY + mainImage->getHeight() > screenHeight)
+	{
+		y = screenHeight - mainImage->getHeight() - 1;
+	}
+	else if (y + velocityY <= 0)
+	{
+		y = 1;
+	}
 }

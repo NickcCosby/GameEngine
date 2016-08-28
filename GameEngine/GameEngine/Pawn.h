@@ -4,7 +4,7 @@
 class Pawn : public Actor
 {
 public:
-	Pawn(int startX, int startY, Bitmap *allSprites, Showable **&allShowable, int &showableLength);
+	Pawn(int startX, int startY, Bitmap *allSprites, Showable **&allShowable, int &showableLength, int width, int height);
 	void inputReact(char input);
 	~Pawn()
 	{

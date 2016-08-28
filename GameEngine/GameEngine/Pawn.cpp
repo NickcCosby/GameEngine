@@ -1,6 +1,6 @@
 #include "Pawn.h"
 
-Pawn::Pawn(int startX, int startY, Bitmap *allSprites, Showable **&allShowable, int &showableLength) : Actor(startX, startY, allShowable, showableLength)
+Pawn::Pawn(int startX, int startY, Bitmap *allSprites, Showable **&allShowable, int &showableLength, int width, int height) : Actor(startX, startY, allShowable, showableLength, width, height)
 {
 	mainImage = allSprites;
 }
@@ -10,7 +10,7 @@ void Pawn::inputReact(char input)
 	switch (input)
 	{
 	case 'w':
-		velocityY = -50;
+		velocityY = -10;
 		velocityX = 0;
 		break;
 	case 's':

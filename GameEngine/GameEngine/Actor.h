@@ -14,8 +14,8 @@ protected:
 	int accelerationY;
 	*/
 public:
-	Actor(int startX, int startY, Showable **&allShowable, int &showableLength);
-	int paint(Showable ***backBuffer, int screenWidth, int screenHeight);
+	Actor(int startX, int startY, Showable **&allShowable, int &showableLength, int width, int height);
+	int paint(Showable ***backBuffer);
 	pixel getColor(int globalX, int globalY);
 	void update();
 	~Actor()

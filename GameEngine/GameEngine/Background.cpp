@@ -1,11 +1,11 @@
 #include "Background.h"
 
-Background::Background(std::string full, Showable ** allShowable, int &showableLength) : Showable(allShowable, showableLength)
+Background::Background(std::string full, Showable ** allShowable, int &showableLength, int width, int height) : Showable(allShowable, showableLength, width, height)
 {
 	mainImage = new Bitmap(full);
 }
 
-int Background::paint(Showable *** backBuffer, int width, int height)
+int Background::paint(Showable *** backBuffer)
 {
 	for (int curHeight = y; curHeight < y + mainImage->getHeight(); curHeight++)
 	{

@@ -19,8 +19,8 @@ GameState::GameState(int givenWidth, int givenHeight, HWND hwnd)
 	allShowable = new Showable*[100];
 	showableLength = 0;
 	allSprites = new Bitmap("ship1.bmp");
-	player = new Pawn(width/2, height/2, allSprites, allShowable, showableLength);
-	activeBackground = new Background("background.bmp", allShowable, showableLength);
+	player = new Pawn(width/2, height/2, allSprites, allShowable, showableLength, width, height);
+	activeBackground = new Background("background.bmp", allShowable, showableLength, width, height);
 	BITMAPINFO bmi;
 	bmi.bmiHeader.biSize = sizeof(BITMAPINFO);
 	bmi.bmiHeader.biWidth = width;
@@ -49,7 +49,7 @@ void GameState::present()
 	for (int aaa = 0; aaa < showableLength; aaa++)
 	{
 		allShowable[aaa]->update();
-		allShowable[aaa]->paint(backBuffer, width, height);
+		allShowable[aaa]->paint(backBuffer);
 	}
 	pixel *temp;
 	for (int heightCur = 0; heightCur < height; heightCur++)
