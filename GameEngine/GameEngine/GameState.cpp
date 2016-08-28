@@ -56,12 +56,12 @@ void GameState::present()
 	{
 		for (int widthCur = 0; widthCur < width; widthCur++)
 		{
-			if (backBuffer[heightCur][widthCur] != NULL)
+			if (backBuffer[widthCur][heightCur] != NULL)
 			{
 				temp = &frontBuffer[heightCur*width + widthCur];
-				temp->b = backBuffer[heightCur][widthCur]->getColor(heightCur, widthCur).b;
-				temp->g = backBuffer[heightCur][widthCur]->getColor(heightCur, widthCur).g;
-				temp->r = backBuffer[heightCur][widthCur]->getColor(heightCur, widthCur).r;
+				temp->b = backBuffer[widthCur][heightCur]->getColor(widthCur, heightCur).b;
+				temp->g = backBuffer[widthCur][heightCur]->getColor(widthCur, heightCur).g;
+				temp->r = backBuffer[widthCur][heightCur]->getColor(widthCur, heightCur).r;
 			}
 		}
 	}
