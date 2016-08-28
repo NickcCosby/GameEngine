@@ -28,18 +28,18 @@ Bitmap::Bitmap(std::string location)
 		colors[i] = new pixel[height];
 	}
 	int colorsLocation = (fileContent[10] + fileContent[11] * pow(16, 2) + fileContent[12] * pow(16, 4) + fileContent[13] * pow(16, 6));
-	int tempRed;
-	int tempBlue;
-	int tempGreen;
 	int tempLocation;
-	for (int bbb = height; bbb >= 0; bbb--)
+	int colorsWritten = 0;
+	for (int bbb = height; bbb > 0; bbb--)
 	{
 		for (int aaa = 0; aaa < width; aaa++)
 		{
-			tempLocation = (((aaa + (height - bbb)*width)*3) + colorsLocation);
+			//tempLocation = (((aaa + (height - bbb)*width)*3) + colorsLocation);
+			tempLocation = (colorsWritten * 3) + colorsLocation;
 			colors[aaa][bbb].b = fileContent[tempLocation];
 			colors[aaa][bbb].g = fileContent[tempLocation + 1];
 			colors[aaa][bbb].r = fileContent[tempLocation + 2];
+			colorsWritten++;
 		}
 	}
 }

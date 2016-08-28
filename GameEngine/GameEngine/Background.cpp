@@ -1,15 +1,15 @@
 #include "Background.h"
 
-Background::Background()
+Background::Background(std::string full, Showable ** allShowable, int &showableLength) : Showable(allShowable, showableLength)
 {
-
+	mainImage = new Bitmap(full);
 }
 
 int Background::paint(Showable *** backBuffer, int width, int height)
 {
-	for (int curHeight = y; curHeight <= y + mainImage->getHeight(); curHeight++)
+	for (int curHeight = y; curHeight < y + mainImage->getHeight(); curHeight++)
 	{
-		for (int curWidth = x; curWidth <= x + mainImage->getWidth(); curWidth++)
+		for (int curWidth = x; curWidth < x + mainImage->getWidth(); curWidth++)
 		{
 			
 			if (backBuffer[curWidth][curHeight] == NULL)
@@ -19,4 +19,13 @@ int Background::paint(Showable *** backBuffer, int width, int height)
 		}
 	}
 	return 0;
+}
+
+pixel Background::getColor(int globalX, int globalY)
+{
+	return mainImage->getColor(globalX, globalY);
+}
+
+void Background::update()
+{
 }

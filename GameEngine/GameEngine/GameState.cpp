@@ -19,7 +19,8 @@ GameState::GameState(int givenWidth, int givenHeight, HWND hwnd)
 	allShowable = new Showable*[100];
 	showableLength = 0;
 	allSprites = new Bitmap("ship1.bmp");
-	Player = new Pawn(width/2, height/2, allSprites, allShowable, showableLength);
+	player = new Pawn(width/2, height/2, allSprites, allShowable, showableLength);
+	activeBackground = new Background("background.bmp", allShowable, showableLength);
 	BITMAPINFO bmi;
 	bmi.bmiHeader.biSize = sizeof(BITMAPINFO);
 	bmi.bmiHeader.biWidth = width;
@@ -40,7 +41,7 @@ GameState::GameState(int givenWidth, int givenHeight, HWND hwnd)
 	// Create DIB section to always give direct access to pixels
 	hbmp = CreateDIBSection(hdc, &bmi, DIB_RGB_COLORS, (void**)&frontBuffer, NULL, 0);
 	DeleteDC(hdc);
-	cleanUp();
+	//cleanUp();
 }
 
 void GameState::present()

@@ -4,6 +4,7 @@
 class Bitmap;
 class Showable;
 class Pawn;
+class Background;
 class GameState
 {
 private:
@@ -14,13 +15,14 @@ private:
 	int width;
 	Showable ***backBuffer;
 	Showable ** allShowable;
-	Pawn *Player;
+	Pawn *player;
 	int showableLength;
 	HBITMAP hbmp;
+	Background *activeBackground;
 public:
 	Pawn *getPlayer()
 	{
-		return Player;
+		return player;
 	}
 	Bitmap *getFrontBuffer()
 	{
