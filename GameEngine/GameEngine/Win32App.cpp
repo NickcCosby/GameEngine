@@ -95,8 +95,8 @@ LRESULT Win32App::realWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 Win32App::Win32App(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	LPSTR lpCmdLine, int nCmdShow)
 {
-	width = 500;
-	height = 500;
+	width = 1600;
+	height = 900;
 	gameState = new GameState(width, height, mainWindow);
 	//Step 1: Registering the Window Class
 	wc.cbSize = sizeof(WNDCLASSEX);
@@ -124,7 +124,7 @@ Win32App::Win32App(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		"mainWindow",
 		"The title of my window",
 		WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, CW_USEDEFAULT, 500, 500,
+		CW_USEDEFAULT, CW_USEDEFAULT, width, height,
 		NULL, NULL, hInstance, NULL);
 	SetWindowLongPtr(mainWindow, GWLP_USERDATA,LONG(this));
 	if (mainWindow == NULL)

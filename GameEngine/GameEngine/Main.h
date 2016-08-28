@@ -7,7 +7,7 @@ struct pixel {
 		int val;
 	};
 	pixel() {
-		val = 0;
+		//val = 0;
 	}
 };
 
@@ -19,10 +19,11 @@ struct pixel {
 #include <sstream>
 #include <stdlib.h>
 #include <math.h>
+#include "Bitmap.h"
 #include "Win32App.h"
 #include "GameState.h"
-#include "Showable.h"
-#include "Bitmap.h"
+
+
 
 union KeyState
 {

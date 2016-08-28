@@ -21,10 +21,7 @@ int Background::paint(Showable *** backBuffer)
 	return 0;
 }
 
-pixel Background::getColor(int globalX, int globalY)
-{
-	return mainImage->getColor(globalX, globalY);
-}
+
 
 void Background::update()
 {

@@ -1,15 +1,12 @@
 #include "Bitmap.h"
 #include <iterator>
 
-inline pixel Bitmap::getColor(int x, int y)
-{
-	return colors[x][y];
-}
-
 Bitmap::Bitmap(std::string location)
 {
 	std::ifstream input(location, std::ios::binary);
 	// copies all data into buffer
+	if (_heapchk() != _HEAPOK)
+		DebugBreak();
 	std::vector<UINT> vectorBuffer((std::istreambuf_iterator<char>(input)), (std::istreambuf_iterator<char>()));
 	UINT *fileContent = new UINT[vectorBuffer.size()];
 	for (UINT iii = 0; iii < vectorBuffer.size(); iii++)

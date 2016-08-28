@@ -130,6 +130,7 @@
     <ClCompile Include="Win32App.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="background.bmp" />
     <Image Include="ship1.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

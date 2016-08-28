@@ -8,7 +8,6 @@ class Background;
 class GameState
 {
 private:
-	//Bitmap *frontBuffer;
 	pixel *frontBuffer;
 	Bitmap *allSprites;
 	int height;
@@ -24,9 +23,9 @@ public:
 	{
 		return player;
 	}
-	Bitmap *getFrontBuffer()
+	pixel *getFrontBuffer()
 	{
-		//return frontBuffer;
+		return frontBuffer;
 	}
 	Showable *** getBackBuffer()
 	{

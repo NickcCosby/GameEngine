@@ -14,9 +14,14 @@ protected:
 	int accelerationY;
 	*/
 public:
+	inline pixel Actor::getColor(int globalX, int globalY)
+	{
+		int bitmapX = globalX - x;
+		int bitmapY = globalY - y;
+		return mainImage->getColor(bitmapX, bitmapY);
+	}
 	Actor(int startX, int startY, Showable **&allShowable, int &showableLength, int width, int height);
 	int paint(Showable ***backBuffer);
-	pixel getColor(int globalX, int globalY);
 	void update();
 	~Actor()
 	{

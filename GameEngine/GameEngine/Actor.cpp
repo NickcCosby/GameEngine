@@ -24,14 +24,6 @@ int Actor::paint(Showable *** backBuffer)
 	return 0;
 }
 
-pixel Actor::getColor(int globalX, int globalY)
-{
-	int bitmapX;
-	int bitmapY;
-	bitmapX = globalX - x;
-	bitmapY = globalY - y;
-	return mainImage->getColor(bitmapX, bitmapY);
-}
 
 void Actor::update()
 {

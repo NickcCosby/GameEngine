@@ -8,7 +8,10 @@ private:
 	int width;
 	int height;
 public:
-	inline pixel getColor(int x, int y);
+	inline pixel Bitmap::getColor(int x, int y)
+	{
+		return colors[x][y];
+	}
 	int getWidth()
 	{
 		return width;
@@ -22,4 +25,7 @@ public:
 	~Bitmap();
 	void setPixelColor(pixel tempColor, int x, int y);
 	Bitmap* createSubBitmap(RECT space);
+
 };
+
+#include "Showable.h"

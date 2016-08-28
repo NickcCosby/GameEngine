@@ -5,7 +5,7 @@ GameState::GameState(int givenWidth, int givenHeight, HWND hwnd)
 	width = givenWidth;
 	height = givenHeight;
 	backBuffer = new Showable**[width];
-	for (int i = 0; i < width; ++i)
+	for (int i = 0; i < width; i++)
 	{
 		backBuffer[i] = new Showable*[height];
 	}
@@ -51,18 +51,12 @@ void GameState::present()
 		allShowable[aaa]->update();
 		allShowable[aaa]->paint(backBuffer);
 	}
-	pixel *temp;
 	for (int heightCur = 0; heightCur < height; heightCur++)
 	{
 		for (int widthCur = 0; widthCur < width; widthCur++)
 		{
-			if (backBuffer[widthCur][heightCur] != NULL)
-			{
-				temp = &frontBuffer[heightCur*width + widthCur];
-				temp->b = backBuffer[widthCur][heightCur]->getColor(widthCur, heightCur).b;
-				temp->g = backBuffer[widthCur][heightCur]->getColor(widthCur, heightCur).g;
-				temp->r = backBuffer[widthCur][heightCur]->getColor(widthCur, heightCur).r;
-			}
+				
+			frontBuffer[heightCur*width + widthCur] = backBuffer[widthCur][heightCur]->getColor(widthCur, heightCur);
 		}
 	}
 	for (int zzz = 0; zzz < height; zzz++)
