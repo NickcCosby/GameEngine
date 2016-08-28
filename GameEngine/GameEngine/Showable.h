@@ -9,6 +9,8 @@ protected:
 	Bitmap *mainImage;
 	double depth;
 	bool isDead = 0;
+	int screenWidth;
+	int screenHeight;
 public:
 	virtual int paint(Showable ***backBuffer, int width, int height) = 0; //adds pointers onto depthCheck array
 	virtual double getDepth()
@@ -25,6 +27,7 @@ public:
 	{
 		delete mainImage;
 	}
+	Showable(Showable ** allShowable, int &showableLength);
 };
 
 #include "Actor.h"

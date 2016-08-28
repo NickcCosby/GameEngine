@@ -1,5 +1,11 @@
 #include "Actor.h"
 
+Actor::Actor(int startX, int startY, Showable **& allShowable, int & showableLength) : Showable(allShowable, showableLength)
+{
+	x = startX;
+	y = startY;
+}
+
 int Actor::paint(Showable *** backBuffer, int screenWidth, int screenHeight)
 {
 	for (int iii = y; iii < mainImage->getHeight()+y && iii < screenHeight; iii++)

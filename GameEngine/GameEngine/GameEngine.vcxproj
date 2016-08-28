@@ -126,6 +126,7 @@
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Pawn.cpp" />
+    <ClCompile Include="Showable.cpp" />
     <ClCompile Include="Win32App.cpp" />
   </ItemGroup>
   <ItemGroup>
