@@ -14,8 +14,12 @@ public:
 	{
 		return mainImage->getColor(globalX, globalY);
 	}
-	Background(std::string full, Showable ** allShowable, int &showableLength, int width, int height);
-	int paint(Showable ***backBuffer);
+	Background(std::string full, int width, int height);
+	void present(pixel * frontBuffer);
+	int paint(Showable **backBuffer)
+	{
+		return 0;
+	}
 	void update();
 	~Background()
 	{

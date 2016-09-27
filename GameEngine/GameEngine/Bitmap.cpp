@@ -19,13 +19,10 @@ Bitmap::Bitmap(std::string location)
 	}
 	width = (fileContent[18]+fileContent[19]*pow(16, 2)+ fileContent[20]*pow(16,4) + fileContent[21]*pow(16,6));
 	height = (fileContent[22] + fileContent[23] * pow(16, 2) + fileContent[24] * pow(16, 4) + fileContent[25] * pow(16, 6));
-	colors = new pixel*[width];
-	for (int i = 0; i < width; ++i)
-	{
-		colors[i] = new pixel[height];
-	}
+	colors = new pixel[width*height];
 	int colorsLocation = (fileContent[10] + fileContent[11] * pow(16, 2) + fileContent[12] * pow(16, 4) + fileContent[13] * pow(16, 6));
 	int tempLocation;
+	int tempColor;
 	int colorsWritten = 0;
 	for (int bbb = height; bbb > 0; bbb--)
 	{
@@ -33,9 +30,9 @@ Bitmap::Bitmap(std::string location)
 		{
 			//tempLocation = (((aaa + (height - bbb)*width)*3) + colorsLocation);
 			tempLocation = (colorsWritten * 3) + colorsLocation;
-			colors[aaa][bbb].b = fileContent[tempLocation];
-			colors[aaa][bbb].g = fileContent[tempLocation + 1];
-			colors[aaa][bbb].r = fileContent[tempLocation + 2];
+			colors[colorsWritten].b = fileContent[tempLocation];
+			colors[colorsWritten].g = fileContent[tempLocation + 1];
+			colors[colorsWritten].r = fileContent[tempLocation + 2];
 			colorsWritten++;
 		}
 	}
@@ -45,24 +42,17 @@ Bitmap::Bitmap(int givenWidth, int givenHeight)
 {
 	width = givenWidth;
 	height = givenHeight;
-	colors = new pixel*[width];
-	for (int i = 0; i < width; ++i)
-	{
-		colors[i] = new pixel[height];
-	}
+	colors = new pixel[width*height];
 }
 
 Bitmap::~Bitmap()
 {
-	for (int iii = 0; iii < width; iii++)
-	{
-			delete[] colors[iii];
-	}
+		delete[] colors;
 }
 
 void Bitmap::setPixelColor(pixel tempColor, int x, int y)
 {
-	colors[x][y] = tempColor;
+	colors[x + (width*y)] = tempColor;
 }
 
 Bitmap* Bitmap::createSubBitmap(RECT space)

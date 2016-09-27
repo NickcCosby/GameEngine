@@ -21,7 +21,11 @@ public:
 		return mainImage->getColor(bitmapX, bitmapY);
 	}
 	Actor(int startX, int startY, Showable **&allShowable, int &showableLength, int width, int height);
-	int paint(Showable ***backBuffer);
+	int paint(Showable** backBuffer);
+	void present(pixel* frontBuffer)
+	{
+
+	}
 	void update();
 	~Actor()
 	{

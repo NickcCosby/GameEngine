@@ -6,18 +6,18 @@ Actor::Actor(int startX, int startY, Showable **& allShowable, int & showableLen
 	y = startY;
 }
 
-int Actor::paint(Showable *** backBuffer)
+int Actor::paint(Showable ** backBuffer)
 {
 	for (int iii = y; iii < mainImage->getHeight()+y && iii < screenHeight; iii++)
 	{
 		for (int bbb = x; bbb < mainImage->getWidth()+x && bbb < screenWidth; bbb++)
 		{
-			if (backBuffer[bbb][iii] == NULL)
-					backBuffer[bbb][iii] = this;
+			if (backBuffer[bbb + (iii*screenWidth)] == NULL)
+					backBuffer[bbb + (iii*screenWidth)] = this;
 				else
 				{
-					if (backBuffer[bbb][iii]->getDepth() < depth)
-						backBuffer[bbb][iii] = this;
+					if (backBuffer[bbb + (iii*screenWidth)]->getDepth() < depth)
+						backBuffer[bbb + (iii*screenWidth)] = this;
 				}
 		}
 	}

@@ -4,13 +4,21 @@
 class Bitmap
 {
 private:
-	pixel **colors;
+	pixel *colors;
 	int width;
 	int height;
 public:
 	inline pixel Bitmap::getColor(int x, int y)
 	{
-		return colors[x][y];
+		return colors[((width*y)+x)];
+	}
+	inline pixel* Bitmap::getRowColors(int y)
+	{
+		return &colors[width*y];
+	}
+	inline pixel* Bitmap::getColors()
+	{
+		return colors;
 	}
 	int getWidth()
 	{

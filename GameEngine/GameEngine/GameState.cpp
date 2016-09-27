@@ -4,23 +4,21 @@ GameState::GameState(int givenWidth, int givenHeight, HWND hwnd)
 {
 	width = givenWidth;
 	height = givenHeight;
-	backBuffer = new Showable**[width];
-	for (int i = 0; i < width; i++)
-	{
-		backBuffer[i] = new Showable*[height];
-	}
+	backBuffer = new Showable*[width*height];
+	nullBackBuffer = new Showable*[width*height];
 	for (int aaa = 0; aaa < height; aaa++)
 	{
 		for (int bbb = 0; bbb < width; bbb++)
 		{
-			backBuffer[bbb][aaa] = NULL;
+			backBuffer[(aaa*width) + bbb] = NULL;
+			nullBackBuffer[(aaa*width) + bbb] = NULL;
 		}
 	}
 	allShowable = new Showable*[100];
 	showableLength = 0;
 	allSprites = new Bitmap("ship1.bmp");
 	player = new Pawn(width/2, height/2, allSprites, allShowable, showableLength, width, height);
-	activeBackground = new Background("background.bmp", allShowable, showableLength, width, height);
+	activeBackground = new Background("background.bmp", width, height);
 	BITMAPINFO bmi;
 	bmi.bmiHeader.biSize = sizeof(BITMAPINFO);
 	bmi.bmiHeader.biWidth = width;
@@ -46,6 +44,7 @@ GameState::GameState(int givenWidth, int givenHeight, HWND hwnd)
 
 void GameState::present()
 {
+	activeBackground->present(frontBuffer);
 	for (int aaa = 0; aaa < showableLength; aaa++)
 	{
 		allShowable[aaa]->update();
@@ -55,17 +54,13 @@ void GameState::present()
 	{
 		for (int widthCur = 0; widthCur < width; widthCur++)
 		{
-				
-			frontBuffer[heightCur*width + widthCur] = backBuffer[widthCur][heightCur]->getColor(widthCur, heightCur);
+			if (backBuffer[widthCur + (heightCur*width)] != NULL)
+			{
+				frontBuffer[heightCur*width + widthCur] = backBuffer[widthCur + (heightCur*width)]->getColor(widthCur, heightCur);
+			}
 		}
 	}
-	for (int zzz = 0; zzz < height; zzz++)
-	{
-		for (int xxx = 0; xxx < width; xxx++)
-		{
-			backBuffer[xxx][zzz] = NULL;
-		}
-	}
+	std::memcpy((void*)backBuffer, (void*)nullBackBuffer, sizeof(Showable*)*width*height);
 }
 
 void GameState::cleanUp()

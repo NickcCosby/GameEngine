@@ -148,6 +148,6 @@ LRESULT Win32App::WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	Win32App *me = (Win32App*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
 	if (me == NULL)
 		return DefWindowProc(hwnd, msg, wParam, lParam);
-	me->realWndProc(hwnd, msg, wParam, lParam);
+	return me->realWndProc(hwnd, msg, wParam, lParam);
 }
 

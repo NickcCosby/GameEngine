@@ -1,24 +1,15 @@
 #include "Background.h"
 
-Background::Background(std::string full, Showable ** allShowable, int &showableLength, int width, int height) : Showable(allShowable, showableLength, width, height)
+Background::Background(std::string full, int width, int height)
 {
+	screenWidth = width;
+	screenHeight = height;
 	mainImage = new Bitmap(full);
 }
 
-int Background::paint(Showable *** backBuffer)
+void Background::present(pixel* frontBuffer)
 {
-	for (int curHeight = y; curHeight < y + mainImage->getHeight(); curHeight++)
-	{
-		for (int curWidth = x; curWidth < x + mainImage->getWidth(); curWidth++)
-		{
-			
-			if (backBuffer[curWidth][curHeight] == NULL)
-			{
-				backBuffer[curWidth][curHeight] = this;
-			}
-		}
-	}
-	return 0;
+	std::memcpy((void*)frontBuffer, (void*)mainImage->getColors(), sizeof(pixel)*screenWidth*screenHeight);
 }
 
 

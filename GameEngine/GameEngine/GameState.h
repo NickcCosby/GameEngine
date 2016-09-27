@@ -12,7 +12,8 @@ private:
 	Bitmap *allSprites;
 	int height;
 	int width;
-	Showable ***backBuffer;
+	Showable **backBuffer;
+	Showable **nullBackBuffer;
 	Showable ** allShowable;
 	Pawn *player;
 	int showableLength;
@@ -27,7 +28,7 @@ public:
 	{
 		return frontBuffer;
 	}
-	Showable *** getBackBuffer()
+	Showable ** getBackBuffer()
 	{
 		return backBuffer;
 	}
