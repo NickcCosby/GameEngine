@@ -4,10 +4,10 @@
 class Bitmap
 {
 private:
-	pixel *colors;
 	int width;
 	int height;
 public:
+	pixel *colors;
 	inline pixel Bitmap::getColor(int x, int y)
 	{
 		return colors[((width*y)+x)];

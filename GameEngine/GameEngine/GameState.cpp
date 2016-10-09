@@ -44,22 +44,25 @@ GameState::GameState(int givenWidth, int givenHeight, HWND hwnd)
 
 void GameState::present()
 {
-	activeBackground->present(frontBuffer);
+	RECT* allCollisions = new RECT[100];
+	int collisionLength = 0;
+	activeBackground->present(frontBuffer, allShowable, showableLength, NULL, allCollisions, collisionLength, backBuffer);
 	for (int aaa = 0; aaa < showableLength; aaa++)
 	{
 		allShowable[aaa]->update();
-		allShowable[aaa]->paint(backBuffer);
+		allShowable[aaa]->present(frontBuffer, allShowable, showableLength, aaa, allCollisions, collisionLength, backBuffer);
 	}
-	for (int heightCur = 0; heightCur < height; heightCur++)
+	for (int iii = 0; iii < collisionLength; iii++)
 	{
-		for (int widthCur = 0; widthCur < width; widthCur++)
+		for (int yCur = allCollisions[iii].top; yCur < allCollisions[iii].bottom; yCur++)
 		{
-			if (backBuffer[widthCur + (heightCur*width)] != NULL)
+			for (int xCur = allCollisions[iii].right; xCur < allCollisions[iii].left; xCur++)
 			{
-				frontBuffer[heightCur*width + widthCur] = backBuffer[widthCur + (heightCur*width)]->getColor(widthCur, heightCur);
+				frontBuffer[xCur + (yCur*width)] = backBuffer[xCur + (yCur*width)]->getColor(xCur, yCur);
 			}
 		}
 	}
+
 	std::memcpy((void*)backBuffer, (void*)nullBackBuffer, sizeof(Showable*)*width*height);
 }
 

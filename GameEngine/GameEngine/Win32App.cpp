@@ -20,7 +20,7 @@ DWORD WINAPI tickThreadProc(LPVOID lpParameter)
 		// Draw pixels to window
 		BitBlt(hdc, 0, 0, me->getWidth(), me->getHeight(), me->getHDCMem(), 0, 0, SRCCOPY);
 		// Wait
-		//Sleep(delay);
+		Sleep(delay);
 		me->getGameState()->cleanUp();
 	}
 	SelectObject(me->getHDCMem(), hbmOld);

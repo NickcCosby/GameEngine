@@ -10,4 +10,8 @@ public:
 	{
 		delete mainImage;
 	}
+	void addCollisions(RECT collisionRECT)
+	{
+
+	}
 };

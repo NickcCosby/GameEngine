@@ -11,6 +11,8 @@ protected:
 	bool isDead = 0;
 	int screenWidth;
 	int screenHeight;
+	RECT* collisions;
+	int collisionCount;
 public:
 	virtual int paint(Showable **backBuffer) = 0; //adds pointers onto depthCheck array
 	virtual double getDepth()
@@ -27,8 +29,10 @@ public:
 	{
 		delete mainImage;
 	}
-	virtual void present(pixel* frontBuffer) = 0;
+	virtual void present(pixel* frontBuffer, Showable** allShowable, int showableLength, int thisIndex, RECT* allCollisions, int &allCollisionsLength, Showable** backBuffer) = 0;
 	Showable(Showable ** allShowable, int &showableLength, int width, int height);
+	virtual RECT getRect() = 0;
+	virtual void addCollisions(RECT collisionRECT) = 0;
 	Showable()
 	{
 

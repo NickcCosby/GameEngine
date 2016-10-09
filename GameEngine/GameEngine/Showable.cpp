@@ -6,4 +6,6 @@ Showable::Showable(Showable ** allShowable, int &showableLength, int width, int 
 	showableLength++;
 	screenWidth = width;
 	screenHeight = height;
+	collisions = new RECT[100];
+	collisionCount = 0;
 }
