@@ -1,4 +1,4 @@
-#include "Background.h"
+#include "Main.h"
 
 Background::Background(std::string full, int width, int height)
 {
@@ -10,10 +10,4 @@ Background::Background(std::string full, int width, int height)
 void Background::present(pixel* frontBuffer, Showable** allShowable, int showableLength, int thisIndex, RECT* allCollisions, int &allCollisionsLength, Showable** backBuffer)
 {
 	std::memcpy((void*)frontBuffer, (void*)mainImage->getColors(), sizeof(pixel)*screenWidth*screenHeight);
-}
-
-
-
-void Background::update()
-{
 }

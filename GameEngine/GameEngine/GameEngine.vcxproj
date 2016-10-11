@@ -74,6 +74,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -112,9 +113,11 @@
   <ItemGroup>
     <ClInclude Include="Actor.h" />
     <ClInclude Include="Bitmap.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="Main.h" />
+    <ClInclude Include="Pathable.h" />
     <ClInclude Include="Pawn.h" />
     <ClInclude Include="Showable.h" />
     <ClInclude Include="Win32App.h" />
@@ -125,12 +128,14 @@
     <ClCompile Include="Bitmap.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Pathable.cpp" />
     <ClCompile Include="Pawn.cpp" />
     <ClCompile Include="Showable.cpp" />
     <ClCompile Include="Win32App.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="background.bmp" />
+    <Image Include="enemy.bmp" />
     <Image Include="ship1.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

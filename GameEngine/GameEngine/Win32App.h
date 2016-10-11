@@ -1,5 +1,4 @@
 #pragma once
-#include "Main.h"
 
 class Bitmap;
 class Showable;

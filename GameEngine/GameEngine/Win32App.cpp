@@ -1,4 +1,4 @@
-#include "Win32App.h"
+#include "Main.h"
 
 DWORD WINAPI tickThreadProc(LPVOID lpParameter)
 {

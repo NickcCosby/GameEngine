@@ -1,8 +1,8 @@
-#include "Pawn.h"
+#include "Main.h"
 
-Pawn::Pawn(int startX, int startY, Bitmap *allSprites, Showable **&allShowable, int &showableLength, int width, int height) : Actor(startX, startY, allShowable, showableLength, width, height)
+Pawn::Pawn(int startX, int startY, Bitmap *allSprites, Showable **&allShowable, int &showableLength, int width, int height) : Actor(startX, startY, allSprites, allShowable, showableLength, width, height)
 {
-	mainImage = allSprites;
+	
 }
 
 void Pawn::inputReact(char input)

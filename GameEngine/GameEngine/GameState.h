@@ -1,10 +1,13 @@
 #pragma once
-#include "Main.h"
+#include "Pawn.h"
+#include "Pathable.h"
 
 class Bitmap;
 class Showable;
 class Pawn;
 class Background;
+class Pathable;
+
 class GameState
 {
 private:
@@ -19,6 +22,7 @@ private:
 	int showableLength;
 	HBITMAP hbmp;
 	Background *activeBackground;
+	Pathable* enemy;
 public:
 	Pawn *getPlayer()
 	{

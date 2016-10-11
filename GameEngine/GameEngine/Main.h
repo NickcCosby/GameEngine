@@ -19,10 +19,14 @@ struct pixel {
 #include <sstream>
 #include <stdlib.h>
 #include <math.h>
+#include "Showable.h"
+#include "Actor.h"
+#include "Pawn.h"
+#include "Pathable.h"
+#include "Background.h"
 #include "Bitmap.h"
 #include "Win32App.h"
 #include "GameState.h"
-
 
 
 union KeyState
@@ -39,5 +43,10 @@ union KeyState
 		unsigned nPrev : 1;
 		unsigned nTrans : 1;
 	};
+};
+
+namespace Path
+{
+
 };
 

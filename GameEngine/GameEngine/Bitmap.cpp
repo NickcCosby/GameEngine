@@ -1,4 +1,4 @@
-#include "Bitmap.h"
+#include "Main.h"
 #include <iterator>
 
 Bitmap::Bitmap(std::string location)
@@ -22,7 +22,6 @@ Bitmap::Bitmap(std::string location)
 	colors = new pixel[width*height];
 	int colorsLocation = (fileContent[10] + fileContent[11] * pow(16, 2) + fileContent[12] * pow(16, 4) + fileContent[13] * pow(16, 6));
 	int tempLocation;
-	int tempColor;
 	int colorsWritten = 0;
 	for (int bbb = height; bbb > 0; bbb--)
 	{

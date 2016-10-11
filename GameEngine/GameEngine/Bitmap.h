@@ -1,5 +1,4 @@
 #pragma once
-#include "Main.h"
 
 class Bitmap
 {
@@ -36,4 +35,3 @@ public:
 
 };
 
-#include "Showable.h"

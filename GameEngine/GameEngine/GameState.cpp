@@ -1,4 +1,4 @@
-#include "GameState.h"
+#include "Main.h"
 
 GameState::GameState(int givenWidth, int givenHeight, HWND hwnd)
 {
@@ -17,7 +17,9 @@ GameState::GameState(int givenWidth, int givenHeight, HWND hwnd)
 	allShowable = new Showable*[100];
 	showableLength = 0;
 	allSprites = new Bitmap("ship1.bmp");
+	Bitmap* enemySprite = new Bitmap("enemy.bmp");
 	player = new Pawn(width/2, height/2, allSprites, allShowable, showableLength, width, height);
+	//enemy = new Pathable(width / 2, height / 4, enemySprite, allShowable, showableLength, width, height);
 	activeBackground = new Background("background.bmp", width, height);
 	BITMAPINFO bmi;
 	bmi.bmiHeader.biSize = sizeof(BITMAPINFO);
