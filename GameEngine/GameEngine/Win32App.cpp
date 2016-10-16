@@ -61,7 +61,7 @@ LRESULT Win32App::realWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			switch (wParam)
 			{
 			case 0x57:
-				gameState->getPlayer()->inputReact('w');
+				gameState->getPlayer()->inputReact('w');  
 				break;
 			case 0x53:
 				gameState->getPlayer()->inputReact('s');
@@ -75,6 +75,8 @@ LRESULT Win32App::realWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			case 0x20:
 				gameState->getPlayer()->inputReact(' ');
 				break;
+			case 0x52:
+				gameState->getPlayer()->inputReact('r');
 			}
 		}
 		break;

@@ -36,10 +36,11 @@ int Showable::paint(Showable ** backBuffer)
 
 void Showable::present(pixel* frontBuffer, int thisIndex, RECT* allCollisions, int &allCollisionsLength, Showable** backBuffer)
 {
-	//find all collisions
+	
 	RECT* otherRECT, *collisionRECT;
 	collisionRECT = new RECT;
 	RECT *myRECT = getRect();
+	//find all collisions
 	{
 		for (int vvv = thisIndex + 1; vvv < *showableLength; vvv++)
 		{
@@ -48,7 +49,7 @@ void Showable::present(pixel* frontBuffer, int thisIndex, RECT* allCollisions, i
 				otherRECT = allShowable[vvv]->getRect();
 				POINT collisionPoint[4];
 				int collisionPointCount = 0;
-				if ((*myRECT).top > (*otherRECT).top)
+  				if ((*myRECT).top > (*otherRECT).top)
 				{
 					(*collisionRECT).top = (*myRECT).top;
 				}

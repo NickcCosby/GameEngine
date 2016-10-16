@@ -20,18 +20,6 @@ GameState::GameState(int givenWidth, int givenHeight, HWND hwnd)
 	Bitmap* enemySprite = new Bitmap("enemy.bmp");
 	player = new Pawn((width/2)+50, height/2, allSprites, allShowable, &showableLength, width, height);
 	enemy = new Ai(width / 2, height / 4, enemySprite, allShowable, &showableLength, width, height);
-	POINT *tempPoint, *tempPoint2;
-	tempPoint = new POINT;
-	tempPoint2 = new POINT;
-	POINT *tempPointArray = new POINT[2];
-	(*tempPoint).x = width / 4;
-	(*tempPoint).y = height / 4;
-	(*tempPoint2).x = (width / 4) * 3;
-	(*tempPoint2).y = height / 4;
-	tempPointArray[0] = *tempPoint;
-	tempPointArray[1] = *tempPoint2;
-	enemy->appendPath (tempPointArray, 2);
-	//enemy->appendPath(tempPoint)->appendPath(tempPoint2);
 	activeBackground = new Background("background.bmp", width, height);
 	BITMAPINFO bmi;
 	bmi.bmiHeader.biSize = sizeof(BITMAPINFO);

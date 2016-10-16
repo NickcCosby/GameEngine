@@ -37,5 +37,9 @@ void Pawn::inputReact(char input)
 		tempPoint.y = 0;
 		bullet->appendPath(tempPoint);
 		break;
+	case 'r':
+		Bitmap* enemySprite = new Bitmap("enemy.bmp");
+		Ai *enemy = new Ai(screenWidth / 2, screenHeight / 4, enemySprite, allShowable, showableLength, screenWidth, screenHeight);
+		break;
 	}
 }
