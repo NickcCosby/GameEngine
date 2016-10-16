@@ -12,7 +12,7 @@ DWORD WINAPI tickThreadProc(LPVOID lpParameter)
 	me->setHDCMem(CreateCompatibleDC(hdc));
 	HBITMAP hbmOld = (HBITMAP)SelectObject(me->getHDCMem(), me->getGameState()->getHbmp());
 	// Milliseconds to wait each frame
-	int delay = 1000 / 60;
+	int delay = 1000 / 120;
 	while (true)
 	{
 		// Do stuff with pixels

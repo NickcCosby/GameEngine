@@ -23,6 +23,8 @@ private:
 	HBITMAP hbmp;
 	Background *activeBackground;
 	Pathable* enemy;
+	RECT* allCollisions;
+	int collisionLength;
 public:
 	Pawn *getPlayer()
 	{

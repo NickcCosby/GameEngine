@@ -15,6 +15,10 @@ public:
 	{
 		return &colors[width*y];
 	}
+	inline pixel* Bitmap::getRowColors(int y, int offset)
+	{
+		return &colors[(width*y) + offset];
+	}
 	inline pixel* Bitmap::getColors()
 	{
 		return colors;

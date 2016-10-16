@@ -35,39 +35,56 @@ int Showable::paint(Showable ** backBuffer)
 void Showable::present(pixel* frontBuffer, Showable** allShowable, int showableLength, int thisIndex, RECT* allCollisions, int &allCollisionsLength, Showable** backBuffer)
 {
 	//find all collisions
-	RECT otherRECT, collisionRECT;
-	RECT myRECT = getRect();
+	RECT* otherRECT, *collisionRECT;
+	collisionRECT = new RECT;
+	RECT *myRECT = getRect();
 	{
 		for (int vvv = thisIndex + 1; vvv < showableLength; vvv++)
 		{
-			if (rectCollide(allShowable[vvv]->getRect()))
+			if (rectCollide(*(allShowable[vvv]->getRect())))
 			{
 				otherRECT = allShowable[vvv]->getRect();
-				if (myRECT.right > otherRECT.left)
+				POINT collisionPoint[4];
+				int collisionPointCount = 0;
+				if ((*myRECT).top > (*otherRECT).top)
 				{
-					collisionRECT.right = myRECT.right;
-					collisionRECT.left = otherRECT.left;
+					(*collisionRECT).top = (*myRECT).top;
 				}
 				else
 				{
-					collisionRECT.right = otherRECT.right;
-					collisionRECT.left = myRECT.left;
+					(*collisionRECT).top = (*otherRECT).top;
 				}
-				if (myRECT.bottom > otherRECT.top)
+				if ((*otherRECT).bottom < (*myRECT).bottom)
 				{
-					collisionRECT.bottom = myRECT.bottom;
-					collisionRECT.top = otherRECT.top;
+					(*collisionRECT).bottom = (*otherRECT).bottom;
 				}
 				else
 				{
-					collisionRECT.bottom = otherRECT.bottom;
-					collisionRECT.top = otherRECT.top;
+					(*collisionRECT).bottom = (*myRECT).bottom;
 				}
-				allCollisions[allCollisionsLength] = collisionRECT;
-				collisions[collisionCount] = collisionRECT;
+				if ((*myRECT).right < (*otherRECT).right)
+				{
+					(*collisionRECT).right = (*myRECT).right;
+				}
+				else
+				{
+					(*collisionRECT).right = (*otherRECT).right;
+				}
+				if ((*myRECT).left < (*otherRECT).left)
+				{
+					(*collisionRECT).left = (*otherRECT).left;
+				}
+				else
+				{
+					(*collisionRECT).left = (*myRECT).left;
+				}
+				allCollisions[allCollisionsLength] = (*collisionRECT);
+				collisions[collisionCount] = (*collisionRECT);
 				allCollisionsLength++;
 				collisionCount++;
-				allShowable[vvv]->addCollision(collisionRECT);
+				allShowable[vvv]->addCollision((*collisionRECT));
+				delete myRECT;
+				delete otherRECT;
 			}
 		}
 	}
@@ -75,10 +92,7 @@ void Showable::present(pixel* frontBuffer, Showable** allShowable, int showableL
 	{
 		for (int curHeight = y; curHeight < y + mainImage->getHeight(); curHeight++)
 		{
-			if (checkRowClean(curHeight) == true)
-			{
-				std::memcpy(&frontBuffer[(screenWidth*(curHeight)) + x], mainImage->getRowColors(curHeight - y), (sizeof(pixel)*mainImage->getWidth()));
-			}
+			std::memcpy(&frontBuffer[(screenWidth*(curHeight)) + x], mainImage->getRowColors(curHeight - y), (sizeof(pixel)*mainImage->getWidth()));
 		}
 	}
 	//paint backBuffer where collision is
@@ -87,7 +101,7 @@ void Showable::present(pixel* frontBuffer, Showable** allShowable, int showableL
 		{
 			for (int yCur = collisions[iii].top; yCur < collisions[iii].bottom; yCur++)
 			{
-				for (int xCur = collisions[iii].right; xCur < collisions[iii].left; xCur++)
+				for (int xCur = collisions[iii].left; xCur < collisions[iii].right; xCur++)
 				{
 					if (backBuffer[xCur + (yCur*screenWidth)] == NULL)
 						backBuffer[xCur + (yCur*screenWidth)] = this;
@@ -102,6 +116,9 @@ void Showable::present(pixel* frontBuffer, Showable** allShowable, int showableL
 			}
 		}
 	}
+	delete[] collisions;
+	collisions = new RECT[100];
+	collisionCount = 0;
 }
 
 #include "Actor.h"

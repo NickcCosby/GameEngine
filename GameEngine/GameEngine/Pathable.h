@@ -12,6 +12,6 @@ protected:
 public:
 	Pathable(int startX, int startY, Bitmap *allSprites, Showable **&allShowable, int &showableLength, int width, int height);
 	void update();
-	Pathable* appendPath(POINT* addedPath, int pathCount);
-	Pathable* appendPath(POINT addedPath);
+	Pathable* appendPaths(POINT* addedPath, int pathCount);
+	Pathable* appendPath(POINT* addedPath);
 };

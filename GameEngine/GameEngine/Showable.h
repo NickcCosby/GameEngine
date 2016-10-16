@@ -35,13 +35,13 @@ public:
 	Showable(int startX, int startY, Showable **& allShowable, int & showableLength, int width, int height);
 	int paint(Showable** backBuffer);
 	void present(pixel* frontBuffer, Showable** allShowable, int showableLength, int thisIndex, RECT* allCollisions, int &allCollisionsLength, Showable** backBuffer);
-	RECT getRect()
+	RECT* getRect()
 	{
-		RECT temp;
-		temp.top = y;
-		temp.left = x;
-		temp.bottom = y + mainImage->getHeight();
-		temp.right = x + mainImage->getWidth();
+		RECT* temp = new RECT;
+		(*temp).top = y;
+		(*temp).left = x;
+		(*temp).bottom = y + mainImage->getHeight();
+		(*temp).right = x + mainImage->getWidth();
 		return temp;
 	}
 	void addCollision(RECT collisionRECT)
@@ -49,32 +49,45 @@ public:
 		collisions[collisionCount] = collisionRECT;
 		collisionCount++;
 	}
-	bool checkRowClean(int y)
+	POINT checkRowClean(int y, int collisionIndex)
 	{
-		for (int nnn = 0; nnn < collisionCount; nnn++)
+		POINT tempPoint;
+		if (collisions[collisionIndex].bottom >= y && collisions[collisionIndex].top <= y)
 		{
-			if (collisions[nnn].bottom > y && collisions[nnn].top < y)
+			if (collisions[collisionIndex].right >= x + mainImage->getWidth())
 			{
-				if (collisions[nnn].right > x + mainImage->getWidth() && collisions[nnn].left < x)
-				{
-					return false;
-				}
-				else
-				{
-					return true;
-				}
+				tempPoint.y = x + mainImage->getWidth();
+			}
+			else
+			{
+				tempPoint.y = collisions[collisionIndex].right;
+			}
+			if (collisions[collisionIndex].left <= x)
+			{
+				tempPoint.x = x;
+			}
+			else
+			{
+				tempPoint.x = collisions[collisionIndex].left;
 			}
 		}
-		return true;
-	}
+		else
+		{
+			tempPoint.x = 0;
+			tempPoint.y = 0;
+		}
+	return tempPoint;
+}
 	bool rectCollide(RECT otherRECT)
 	{
-		RECT myRECT = getRect();
-		if (myRECT.left < otherRECT.right && myRECT.right > otherRECT.left &&
-			myRECT.top < otherRECT.bottom && myRECT.bottom > otherRECT.top)
+		RECT *myRECT = getRect();
+		if ((*myRECT).left < otherRECT.right && (*myRECT).right > otherRECT.left &&
+			(*myRECT).top < otherRECT.bottom && (*myRECT).bottom > otherRECT.top)
 		{
+			delete myRECT;
 			return true;
 		}
+		delete myRECT;
 		return false;
 	}
 	Showable()

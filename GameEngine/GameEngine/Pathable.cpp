@@ -36,7 +36,7 @@ void Pathable::update()
 	Actor::update();
 }
 
-Pathable* Pathable::appendPath(POINT * addedPath, int pathCount)
+Pathable* Pathable::appendPaths(POINT * addedPath, int pathCount)
 {
 	pathLength += pathCount;
 	for (int iii = 0; iii < pathCount; iii++)
@@ -48,14 +48,16 @@ Pathable* Pathable::appendPath(POINT * addedPath, int pathCount)
 	return this;
 }
 
-Pathable * Pathable::appendPath(POINT addedPath)
+Pathable * Pathable::appendPath(POINT * addedPath)
 {
-	path[pathLength] = addedPath;
+	path[pathLength] = *addedPath;
 	pathLength++;
 	return this;
 }
 
 Pathable::Pathable(int startX, int startY, Bitmap * allSprites, Showable **& allShowable, int & showableLength, int width, int height) : Actor(startX, startY, allSprites, allShowable, showableLength, width, height)
 {
-	depth = 0;
+	path = new POINT[100];
+	loop = true;
+	depth = .5;
 }
