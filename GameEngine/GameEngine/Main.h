@@ -23,6 +23,8 @@ struct pixel {
 #include "Actor.h"
 #include "Pawn.h"
 #include "Pathable.h"
+#include "Projectile.h"
+#include "Ai.h"
 #include "Background.h"
 #include "Bitmap.h"
 #include "Win32App.h"

@@ -72,6 +72,9 @@ LRESULT Win32App::realWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			case 0x44:
 				gameState->getPlayer()->inputReact('d');
 				break;
+			case 0x20:
+				gameState->getPlayer()->inputReact(' ');
+				break;
 			}
 		}
 		break;

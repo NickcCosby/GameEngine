@@ -15,7 +15,7 @@ protected:
 	int accelerationY;
 	*/
 public:
-	Actor(int startX, int startY, Bitmap *allSprites, Showable **&allShowable, int &showableLength, int width, int height);
+	Actor(int startX, int startY, Bitmap *allSprites, Showable **&allShowable, int *showableLength, int width, int height);
 	void update();
 	~Actor()
 	{

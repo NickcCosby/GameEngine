@@ -22,7 +22,7 @@ private:
 	int showableLength;
 	HBITMAP hbmp;
 	Background *activeBackground;
-	Pathable* enemy;
+	Ai* enemy;
 	RECT* allCollisions;
 	int collisionLength;
 public:

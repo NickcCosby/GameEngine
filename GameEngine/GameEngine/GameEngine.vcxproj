@@ -113,12 +113,13 @@
   <ItemGroup>
     <ClInclude Include="Actor.h" />
     <ClInclude Include="Bitmap.h" />
-    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Ai.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="Pathable.h" />
     <ClInclude Include="Pawn.h" />
+    <ClInclude Include="Projectile.h" />
     <ClInclude Include="Showable.h" />
     <ClInclude Include="Win32App.h" />
   </ItemGroup>
@@ -126,10 +127,12 @@
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Bitmap.cpp" />
+    <ClCompile Include="Ai.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Pathable.cpp" />
     <ClCompile Include="Pawn.cpp" />
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Showable.cpp" />
     <ClCompile Include="Win32App.cpp" />
   </ItemGroup>

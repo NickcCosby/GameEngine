@@ -16,8 +16,11 @@ protected:
 	int screenHeight;
 	RECT* collisions;
 	int collisionCount;
+	Showable **allShowable;
+	int* showableLength;
 public:
 	virtual void update() = 0;
+	virtual void collide(Showable* otherShowable) = 0;
 	double getDepth()
 	{
 		return depth;
@@ -32,9 +35,9 @@ public:
 		int bitmapY = globalY - y;
 		return mainImage->getColor(bitmapX, bitmapY);
 	}
-	Showable(int startX, int startY, Showable **& allShowable, int & showableLength, int width, int height);
+	Showable(int startX, int startY, Showable **& allShowable, int * showableLength, int width, int height);
 	int paint(Showable** backBuffer);
-	void present(pixel* frontBuffer, Showable** allShowable, int showableLength, int thisIndex, RECT* allCollisions, int &allCollisionsLength, Showable** backBuffer);
+	void present(pixel* frontBuffer, int thisIndex, RECT* allCollisions, int &allCollisionsLength, Showable** backBuffer);
 	RECT* getRect()
 	{
 		RECT* temp = new RECT;
@@ -89,6 +92,10 @@ public:
 		}
 		delete myRECT;
 		return false;
+	}
+	void setAllShowable(Showable** newAllShowable)
+	{
+ 		allShowable = newAllShowable;
 	}
 	Showable()
 	{

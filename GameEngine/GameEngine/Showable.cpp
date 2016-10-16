@@ -1,9 +1,11 @@
 #include "Main.h"
 
-Showable::Showable(int startX, int startY, Showable **& allShowable, int & showableLength, int width, int height)
+Showable::Showable(int startX, int startY, Showable **& allShowableGiven, int * showableLengthGiven, int width, int height)
 {
-	allShowable[showableLength] = this;
-	showableLength++;
+	allShowable = allShowableGiven;
+	showableLength = showableLengthGiven;
+	allShowable[*showableLength] = this;
+	(*showableLength)++;
 	screenWidth = width;
 	screenHeight = height;
 	collisions = new RECT[100];
@@ -32,14 +34,14 @@ int Showable::paint(Showable ** backBuffer)
 	return 0;
 }
 
-void Showable::present(pixel* frontBuffer, Showable** allShowable, int showableLength, int thisIndex, RECT* allCollisions, int &allCollisionsLength, Showable** backBuffer)
+void Showable::present(pixel* frontBuffer, int thisIndex, RECT* allCollisions, int &allCollisionsLength, Showable** backBuffer)
 {
 	//find all collisions
 	RECT* otherRECT, *collisionRECT;
 	collisionRECT = new RECT;
 	RECT *myRECT = getRect();
 	{
-		for (int vvv = thisIndex + 1; vvv < showableLength; vvv++)
+		for (int vvv = thisIndex + 1; vvv < *showableLength; vvv++)
 		{
 			if (rectCollide(*(allShowable[vvv]->getRect())))
 			{
@@ -107,6 +109,8 @@ void Showable::present(pixel* frontBuffer, Showable** allShowable, int showableL
 						backBuffer[xCur + (yCur*screenWidth)] = this;
 					else
 					{
+						collide(backBuffer[xCur + (yCur*screenWidth)]);
+						backBuffer[xCur + (yCur*screenWidth)]->collide(this);
 						if (backBuffer[xCur + (yCur*screenWidth)]->getDepth() < depth)
 						{
 							backBuffer[xCur + (yCur*screenWidth)] = this;

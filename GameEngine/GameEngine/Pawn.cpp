@@ -1,8 +1,12 @@
 #include "Main.h"
 
-Pawn::Pawn(int startX, int startY, Bitmap *allSprites, Showable **&allShowable, int &showableLength, int width, int height) : Actor(startX, startY, allSprites, allShowable, showableLength, width, height)
+Pawn::Pawn(int startX, int startY, Bitmap *allSprites, Showable **&allShowable, int *showableLength, int width, int height) : Actor(startX, startY, allSprites, allShowable, showableLength, width, height)
 {
 	depth = .75;
+}
+
+void Pawn::collide(Showable * otherShowable)
+{
 }
 
 void Pawn::inputReact(char input)
@@ -24,6 +28,14 @@ void Pawn::inputReact(char input)
 	case 'd':
 		velocityY = 0;
 		velocityX = 10;
+		break;
+	case ' ':
+		Projectile* bullet;
+		bullet = new Projectile(x, y, mainImage, allShowable, showableLength, screenWidth, screenHeight);
+		POINT tempPoint;
+		tempPoint.x = x;
+		tempPoint.y = 0;
+		bullet->appendPath(tempPoint);
 		break;
 	}
 }

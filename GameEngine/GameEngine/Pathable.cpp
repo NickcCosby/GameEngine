@@ -8,8 +8,8 @@ void Pathable::update()
 		double xDiff = path[pathCurrent].x - x;
 		double yDiff = path[pathCurrent].y - y;
 		double theta = atan(yDiff / xDiff);
-		absVelocityX = (int)(velocityTotal*cos(theta));
-		absVelocityY = (int)(velocityTotal*sin(theta));
+		absVelocityX = abs((int)(velocityTotal*cos(theta)));
+		absVelocityY = abs((int)(velocityTotal*sin(theta)));
 		if (xDiff >= 0)
 		{
 			velocityX = absVelocityX;
@@ -36,6 +36,7 @@ void Pathable::update()
 				}
 				else
 				{
+					pathEnded = true;
 					delete[] path;
 					path = new POINT[100];
 					pathCurrent = 0;
@@ -56,7 +57,7 @@ void Pathable::update()
 	Actor::update();
 }
 
-Pathable* Pathable::appendPaths(POINT * addedPath, int pathCount)
+Pathable* Pathable::appendPath(POINT * addedPath, int pathCount)
 {
 	for (int iii = 0; iii < pathCount; iii++)
 	{
@@ -67,17 +68,15 @@ Pathable* Pathable::appendPaths(POINT * addedPath, int pathCount)
 	return this;
 }
 
-Pathable * Pathable::appendPath(POINT * addedPath)
+Pathable * Pathable::appendPath(POINT  addedPath)
 {
-	path[pathLength] = *addedPath;
+	path[pathLength] = addedPath;
 	pathLength++;
 	return this;
 }
 
-Pathable::Pathable(int startX, int startY, Bitmap * allSprites, Showable **& allShowable, int & showableLength, int width, int height) : Actor(startX, startY, allSprites, allShowable, showableLength, width, height)
+Pathable::Pathable(int startX, int startY, Bitmap * allSprites, Showable **& allShowable, int * showableLength, int width, int height) : Actor(startX, startY, allSprites, allShowable, showableLength, width, height)
 {
 	path = new POINT[100];
-	velocityTotal = 5;
-	loop = true;
-	depth = .5;
+	pathEnded = false;
 }

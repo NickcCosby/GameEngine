@@ -18,8 +18,8 @@ GameState::GameState(int givenWidth, int givenHeight, HWND hwnd)
 	showableLength = 0;
 	allSprites = new Bitmap("ship1.bmp");
 	Bitmap* enemySprite = new Bitmap("enemy.bmp");
-	player = new Pawn((width/2)+50, height/2, allSprites, allShowable, showableLength, width, height);
-	enemy = new Pathable(width / 2, height / 4, enemySprite, allShowable, showableLength, width, height);
+	player = new Pawn((width/2)+50, height/2, allSprites, allShowable, &showableLength, width, height);
+	enemy = new Ai(width / 2, height / 4, enemySprite, allShowable, &showableLength, width, height);
 	POINT *tempPoint, *tempPoint2;
 	tempPoint = new POINT;
 	tempPoint2 = new POINT;
@@ -30,7 +30,7 @@ GameState::GameState(int givenWidth, int givenHeight, HWND hwnd)
 	(*tempPoint2).y = height / 4;
 	tempPointArray[0] = *tempPoint;
 	tempPointArray[1] = *tempPoint2;
-	enemy->appendPaths(tempPointArray, 2);
+	enemy->appendPath (tempPointArray, 2);
 	//enemy->appendPath(tempPoint)->appendPath(tempPoint2);
 	activeBackground = new Background("background.bmp", width, height);
 	BITMAPINFO bmi;
@@ -67,7 +67,7 @@ void GameState::present()
 	}
 	for (int aaa = 0; aaa < showableLength; aaa++)
 	{
-		allShowable[aaa]->present(frontBuffer, allShowable, showableLength, aaa, allCollisions, collisionLength, backBuffer);
+		allShowable[aaa]->present(frontBuffer, aaa, allCollisions, collisionLength, backBuffer);
 	}
 	for (int iii = 0; iii < collisionLength; iii++)
 	{
@@ -88,18 +88,25 @@ void GameState::cleanUp()
 {
 	Showable **tempArray;
 	tempArray = new Showable*[100];
-	for (int aaa = 0; aaa < showableLength; aaa++)
+	int deletedCount = 0;
+	int showableTemp = showableLength;
+	for (int aaa = 0; aaa < showableTemp; aaa++)
 	{
 		if (allShowable[aaa]->getIsDead() == true)
 		{
 			showableLength--;
 			delete allShowable[aaa];
+			deletedCount++;
 		}
 		else
 		{
-			tempArray[aaa] = allShowable[aaa];
+			tempArray[aaa-deletedCount] = allShowable[aaa];
 		}
 	}
 	delete[] allShowable;
 	allShowable = tempArray;
+	for (int bbb = 0; bbb < showableLength; bbb++)
+	{
+		allShowable[bbb]->setAllShowable(allShowable);
+	}
 }
