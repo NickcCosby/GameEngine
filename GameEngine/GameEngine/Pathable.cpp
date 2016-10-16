@@ -3,10 +3,30 @@ void Pathable::update()
 {
 	if (pathLength > 0)
 	{
-		double theta = atan((double)path[pathCurrent].y / (double)path[pathCurrent].x);
-		velocityX = (int)(velocityTotal*cos(theta));
-		velocityY = (int)(velocityTotal*sin(theta));
-		if ((!(x+velocityX < path[pathCurrent].x-velocityX) && !(path[pathCurrent].x < x)) && (!(y+velocityY < path[pathCurrent].y-velocityY) && !(path[pathCurrent].y  < y)))
+		int absVelocityX;
+		int absVelocityY;
+		double xDiff = path[pathCurrent].x - x;
+		double yDiff = path[pathCurrent].y - y;
+		double theta = atan(yDiff / xDiff);
+		absVelocityX = (int)(velocityTotal*cos(theta));
+		absVelocityY = (int)(velocityTotal*sin(theta));
+		if (xDiff >= 0)
+		{
+			velocityX = absVelocityX;
+		}
+		else
+		{
+			velocityX = -1 * absVelocityX;
+		}
+		if (yDiff >= 0)
+		{
+			velocityY = absVelocityY;
+		}
+		else
+		{
+			velocityY = -1 * absVelocityY;
+		}
+		if (abs(xDiff) <= abs(velocityX) && abs(yDiff) <= abs(velocityY))
 		{
 			if (pathCurrent + 1 == pathLength)
 			{
@@ -38,7 +58,6 @@ void Pathable::update()
 
 Pathable* Pathable::appendPaths(POINT * addedPath, int pathCount)
 {
-	pathLength += pathCount;
 	for (int iii = 0; iii < pathCount; iii++)
 	{
 		path[pathLength + iii] = addedPath[iii];
@@ -58,6 +77,7 @@ Pathable * Pathable::appendPath(POINT * addedPath)
 Pathable::Pathable(int startX, int startY, Bitmap * allSprites, Showable **& allShowable, int & showableLength, int width, int height) : Actor(startX, startY, allSprites, allShowable, showableLength, width, height)
 {
 	path = new POINT[100];
+	velocityTotal = 5;
 	loop = true;
 	depth = .5;
 }

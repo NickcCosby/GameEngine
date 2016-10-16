@@ -7,7 +7,7 @@ protected:
 	POINT* path;
 	int pathCurrent;
 	int pathLength;
-	int velocityTotal = 15;
+	int velocityTotal;
 	bool loop;
 public:
 	Pathable(int startX, int startY, Bitmap *allSprites, Showable **&allShowable, int &showableLength, int width, int height);
