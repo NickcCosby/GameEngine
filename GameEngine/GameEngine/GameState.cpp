@@ -64,6 +64,9 @@ void GameState::present()
 	for (int aaa = 0; aaa < showableLength; aaa++)
 	{
 		allShowable[aaa]->update();
+	}
+	for (int aaa = 0; aaa < showableLength; aaa++)
+	{
 		allShowable[aaa]->present(frontBuffer, allShowable, showableLength, aaa, allCollisions, collisionLength, backBuffer);
 	}
 	for (int iii = 0; iii < collisionLength; iii++)
