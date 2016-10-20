@@ -13,6 +13,10 @@ private:
 public:
 	Background(std::string full, int width, int height);
 	void present(pixel* frontBuffer, Showable** allShowable, int showableLength, int thisIndex, RECT* allCollisions, int &allCollisionsLength, Showable** backBuffer);
+	inline Bitmap* getMainImage()
+	{
+		return mainImage;
+	}
 	~Background()
 	{
 		delete mainImage;

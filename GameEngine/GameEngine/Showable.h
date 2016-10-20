@@ -21,6 +21,18 @@ protected:
 public:
 	virtual void update() = 0;
 	virtual void collide(Showable* otherShowable) = 0;
+	int getY()
+	{
+		return y;
+	}
+	int getX()
+	{
+		return x;
+	}
+	Bitmap* getMainImage()
+	{
+		return mainImage;
+	}
 	double getDepth()
 	{
 		return depth;

@@ -154,5 +154,5 @@ LRESULT Win32App::WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	if (me == NULL)
 		return DefWindowProc(hwnd, msg, wParam, lParam);
 	return me->realWndProc(hwnd, msg, wParam, lParam);
-}
+ }
 

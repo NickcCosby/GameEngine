@@ -85,13 +85,16 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="ship1.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="background.bmp">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="enemy.bmp">
+    <Image Include="realShip.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Bullet.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RealEnemyShip.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

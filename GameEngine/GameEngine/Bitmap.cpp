@@ -20,6 +20,8 @@ Bitmap::Bitmap(std::string location)
 	width = (fileContent[18]+fileContent[19]*pow(16, 2)+ fileContent[20]*pow(16,4) + fileContent[21]*pow(16,6));
 	height = (fileContent[22] + fileContent[23] * pow(16, 2) + fileContent[24] * pow(16, 4) + fileContent[25] * pow(16, 6));
 	colors = new pixel[width*height];
+	nullPoints = new POINT[width*height];
+	nullPointsCount = 0;
 	int colorsLocation = (fileContent[10] + fileContent[11] * pow(16, 2) + fileContent[12] * pow(16, 4) + fileContent[13] * pow(16, 6));
 	int tempLocation;
 	int colorsWritten = 0;
@@ -32,6 +34,12 @@ Bitmap::Bitmap(std::string location)
 			colors[colorsWritten].b = fileContent[tempLocation];
 			colors[colorsWritten].g = fileContent[tempLocation + 1];
 			colors[colorsWritten].r = fileContent[tempLocation + 2];
+			if (colors[colorsWritten].b == 150 && colors[colorsWritten].g == 150 && colors[colorsWritten].r == 150)
+			{
+				nullPoints[nullPointsCount].x = colorsWritten % width;
+				nullPoints[nullPointsCount].y = (int)colorsWritten/(int)width;
+				nullPointsCount++;
+			}
 			colorsWritten++;
 		}
 	}

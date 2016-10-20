@@ -39,16 +39,14 @@ void Showable::present(pixel* frontBuffer, int thisIndex, RECT* allCollisions, i
 	
 	RECT* otherRECT, *collisionRECT;
 	collisionRECT = new RECT;
-	RECT *myRECT = getRect();
 	//find all collisions
 	{
 		for (int vvv = thisIndex + 1; vvv < *showableLength; vvv++)
 		{
 			if (rectCollide(*(allShowable[vvv]->getRect())))
 			{
+				RECT *myRECT = getRect();
 				otherRECT = allShowable[vvv]->getRect();
-				POINT collisionPoint[4];
-				int collisionPointCount = 0;
   				if ((*myRECT).top > (*otherRECT).top)
 				{
 					(*collisionRECT).top = (*myRECT).top;
@@ -91,14 +89,14 @@ void Showable::present(pixel* frontBuffer, int thisIndex, RECT* allCollisions, i
 			}
 		}
 	}
-	//paint non-collision areas onto frontBuffer
+	//paint onto frontBuffer
 	{
 		for (int curHeight = y; curHeight < y + mainImage->getHeight(); curHeight++)
 		{
 			std::memcpy(&frontBuffer[(screenWidth*(curHeight)) + x], mainImage->getRowColors(curHeight - y), (sizeof(pixel)*mainImage->getWidth()));
 		}
 	}
-	//paint backBuffer where collision is
+	//paint collision areas onto backBuffer
 	{
 		for (int iii = 0; iii < collisionCount; iii++)
 		{
@@ -106,15 +104,18 @@ void Showable::present(pixel* frontBuffer, int thisIndex, RECT* allCollisions, i
 			{
 				for (int xCur = collisions[iii].left; xCur < collisions[iii].right; xCur++)
 				{
-					if (backBuffer[xCur + (yCur*screenWidth)] == NULL)
-						backBuffer[xCur + (yCur*screenWidth)] = this;
-					else
+					if (!(mainImage->getColors()[((yCur - y)*mainImage->getWidth()) + (xCur - x)].b == 150 && mainImage->getColors()[((yCur - y)*mainImage->getWidth()) + (xCur - x)].g == 150 && mainImage->getColors()[((yCur - y)*mainImage->getWidth()) + (xCur - x)].r == 150))
 					{
-						collide(backBuffer[xCur + (yCur*screenWidth)]);
-						backBuffer[xCur + (yCur*screenWidth)]->collide(this);
-						if (backBuffer[xCur + (yCur*screenWidth)]->getDepth() < depth)
-						{
+						if (backBuffer[xCur + (yCur*screenWidth)] == NULL)
 							backBuffer[xCur + (yCur*screenWidth)] = this;
+						else
+						{
+							collide(backBuffer[xCur + (yCur*screenWidth)]);
+							backBuffer[xCur + (yCur*screenWidth)]->collide(this);
+							if (backBuffer[xCur + (yCur*screenWidth)]->getDepth() < depth)
+							{
+								backBuffer[xCur + (yCur*screenWidth)] = this;
+							}
 						}
 					}
 				}

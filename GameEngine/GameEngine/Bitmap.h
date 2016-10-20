@@ -5,8 +5,18 @@ class Bitmap
 private:
 	int width;
 	int height;
-public:
 	pixel *colors;
+	POINT* nullPoints;
+	int nullPointsCount;
+public:
+	inline POINT* Bitmap::getNullPoints()
+	{
+		return nullPoints;
+	}
+	int getNullPointsCount()
+	{
+		return nullPointsCount;
+	}
 	inline pixel Bitmap::getColor(int x, int y)
 	{
 		return colors[((width*y)+x)];

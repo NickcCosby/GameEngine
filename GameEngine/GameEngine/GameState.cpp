@@ -16,15 +16,15 @@ GameState::GameState(int givenWidth, int givenHeight, HWND hwnd)
 	}
 	allShowable = new Showable*[100];
 	showableLength = 0;
-	allSprites = new Bitmap("ship1.bmp");
-	Bitmap* enemySprite = new Bitmap("enemy.bmp");
+	allSprites = new Bitmap("realShip.bmp");
+	Bitmap* enemySprite = new Bitmap("RealEnemyShip.bmp");
 	player = new Pawn((width/2)+50, height/2, allSprites, allShowable, &showableLength, width, height);
 	enemy = new Ai(width / 2, height / 4, enemySprite, allShowable, &showableLength, width, height);
 	activeBackground = new Background("background.bmp", width, height);
 	BITMAPINFO bmi;
 	bmi.bmiHeader.biSize = sizeof(BITMAPINFO);
 	bmi.bmiHeader.biWidth = width;
-	bmi.bmiHeader.biHeight = -height; // Order pixels from top to bottom
+	bmi.bmiHeader.biHeight = height; // Order pixels from top to bottom
 	bmi.bmiHeader.biPlanes = 1;
 	bmi.bmiHeader.biBitCount = 32; // last byte not used, 32 bit for alignment
 	bmi.bmiHeader.biCompression = BI_RGB;
@@ -57,13 +57,27 @@ void GameState::present()
 	{
 		allShowable[aaa]->present(frontBuffer, aaa, allCollisions, collisionLength, backBuffer);
 	}
+	POINT* tempNullPoints;
+	int tempNullPointsCount;
+	for (int aaa = 0; aaa < showableLength; aaa++)
+	{
+		tempNullPoints = allShowable[aaa]->getMainImage()->getNullPoints();
+		tempNullPointsCount = allShowable[aaa]->getMainImage()->getNullPointsCount();
+		for (int bbb = 0; bbb < tempNullPointsCount; bbb++)
+		{
+			frontBuffer[((tempNullPoints[bbb].y+allShowable[aaa]->getY())*width) + tempNullPoints[bbb].x+allShowable[aaa]->getX()] = activeBackground->getMainImage()->getColor(tempNullPoints[bbb].x+allShowable[aaa]->getX(), tempNullPoints[bbb].y+allShowable[aaa]->getY());
+		}
+	}
 	for (int iii = 0; iii < collisionLength; iii++)
 	{
 		for (int yCur = allCollisions[iii].top; yCur < allCollisions[iii].bottom; yCur++)
 		{
 			for (int xCur = allCollisions[iii].left; xCur < allCollisions[iii].right; xCur++)
 			{
-				frontBuffer[xCur + (yCur*width)] = backBuffer[xCur + (yCur*width)]->getColor(xCur, yCur);
+				if (backBuffer[xCur + (yCur*width)] != NULL)
+				{
+					frontBuffer[xCur + (yCur*width)] = backBuffer[xCur + (yCur*width)]->getColor(xCur, yCur);
+				}
 			}
 		}
 	}

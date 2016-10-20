@@ -138,8 +138,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="background.bmp" />
-    <Image Include="enemy.bmp" />
-    <Image Include="ship1.bmp" />
+    <Image Include="Bullet.bmp" />
+    <Image Include="RealEnemyShip.bmp" />
+    <Image Include="realShip.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
