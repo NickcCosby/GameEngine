@@ -2,7 +2,7 @@
 
 Projectile::Projectile(int startX, int startY, Bitmap * allSprites, Showable **& allShowable, int * showableLength, int width, int height) : Pathable(startX, startY, allSprites, allShowable, showableLength, width, height)
 {
-	velocityTotal = 15;
+	velocityTotal = 600;
 }
 
 void Projectile::collide(Showable * otherShowable)
@@ -13,9 +13,9 @@ void Projectile::collide(Showable * otherShowable)
 	}
 }
 
-void Projectile::update()
+void Projectile::update(std::clock_t time)
 {
-	Pathable::update();
+	Pathable::update(time);
 	if (pathEnded == true)
 	{
 		isDead = true;

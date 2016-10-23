@@ -15,27 +15,27 @@ void Pawn::inputReact(char input)
 	switch (input)
 	{
 	case 'w':
-		velocityY = 10;
+		velocityY = 500;
 		velocityX = 0;
 		break;
 	case 's':
-		velocityY = -10;
+		velocityY = -500;
 		velocityX = 0;
 		break;
 	case 'a':
 		velocityY = 0;
-		velocityX = -10;
+		velocityX = -500;
 		break;
 	case 'd':
 		velocityY = 0;
-		velocityX = 10;
+		velocityX = 500;
 		break;
 	case ' ':
 		Projectile* bullet;
 		bullet = new Projectile(x + (mainImage->getWidth()/2), y, bulletImage, allShowable, showableLength, screenWidth, screenHeight);
 		POINT tempPoint;
-		tempPoint.x = x;
-		tempPoint.y = screenHeight;
+		tempPoint.x = x + (mainImage->getWidth()/2);
+		tempPoint.y = screenHeight-bulletImage->getHeight();
 		bullet->appendPath(tempPoint);
 		break;
 	case 'r':

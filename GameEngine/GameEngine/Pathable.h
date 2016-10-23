@@ -12,7 +12,7 @@ protected:
 	bool pathEnded;
 public:
 	Pathable(int startX, int startY, Bitmap *allSprites, Showable **&allShowable, int *showableLength, int width, int height);
-	void update();
+	void update(std::clock_t time);
 	Pathable* appendPath(POINT* addedPath, int pathCount);
 	Pathable* appendPath(POINT addedPath);
 };

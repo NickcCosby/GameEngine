@@ -18,8 +18,9 @@ protected:
 	int collisionCount;
 	Showable **allShowable;
 	int* showableLength;
+	std::clock_t lastTime;
 public:
-	virtual void update() = 0;
+	virtual void update(std::clock_t time) = 0;
 	virtual void collide(Showable* otherShowable) = 0;
 	int getY()
 	{

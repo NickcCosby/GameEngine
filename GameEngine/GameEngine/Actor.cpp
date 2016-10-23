@@ -3,32 +3,44 @@
 Actor::Actor(int startX, int startY, Bitmap *allSprites, Showable **&allShowable, int *showableLength, int width, int height) : Showable(startX, startY, allShowable, showableLength, width, height)
 {
 	mainImage = allSprites;
+	lastTime = 0;
+	deltaX = 0;
+	deltaY = 0;
+	velocityX = 0;
+	velocityY = 0;
 }
 
-void Actor::update()
+void Actor::update(std::clock_t time)
 {
-	if (x+velocityX >= 0 && x+velocityX+mainImage->getWidth() < screenWidth)
+	if (lastTime != 0)
 	{
-		x += velocityX;
+		double duration = (time - lastTime) / (double)CLOCKS_PER_SEC;
+		deltaX = velocityX * duration;
+		deltaY = velocityY * duration;
+		if (x + deltaX >= 0 && x + deltaX + mainImage->getWidth() < screenWidth)
+		{
+			x += deltaX;
+		}
+		else if (x + deltaX + mainImage->getWidth() > screenWidth)
+		{
+			x = screenWidth - mainImage->getWidth() - 1;
+		}
+		else if (x + deltaX <= 0)
+		{
+			x = 1;
+		}
+		if (y + deltaY >= 0 && y + deltaY + mainImage->getHeight() < screenHeight)
+		{
+			y += deltaY;
+		}
+		else if (y + deltaY + mainImage->getHeight() > screenHeight)
+		{
+			y = screenHeight - mainImage->getHeight() - 1;
+		}
+		else if (y + deltaY <= 0)
+		{
+			y = 1;
+		}
 	}
-	else if (x + velocityX + mainImage->getWidth() > screenWidth)
-	{
-		x = screenWidth - mainImage->getWidth() - 1;
-	}
-	else if(x + velocityX <= 0)
-	{
-		x = 1;
-	}
-	if (y + velocityY >= 0 && y + velocityY + mainImage->getHeight() < screenHeight)
-	{
-		y += velocityY;
-	}
-	else if (y + velocityY + mainImage->getHeight() > screenHeight)
-	{
-		y = screenHeight - mainImage->getHeight() - 1;
-	}
-	else if (y + velocityY <= 0)
-	{
-		y = 1;
-	}
+	lastTime = time;
 }

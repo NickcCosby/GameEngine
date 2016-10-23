@@ -19,6 +19,7 @@ struct pixel {
 #include <sstream>
 #include <stdlib.h>
 #include <math.h>
+#include <ctime>
 #include "Showable.h"
 #include "Actor.h"
 #include "Pawn.h"

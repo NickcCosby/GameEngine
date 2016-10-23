@@ -6,6 +6,7 @@ GameState::GameState(int givenWidth, int givenHeight, HWND hwnd)
 	height = givenHeight;
 	backBuffer = new Showable*[width*height];
 	nullBackBuffer = new Showable*[width*height];
+	midBuffer = new pixel[width*height];
 	for (int aaa = 0; aaa < height; aaa++)
 	{
 		for (int bbb = 0; bbb < width; bbb++)
@@ -26,7 +27,7 @@ GameState::GameState(int givenWidth, int givenHeight, HWND hwnd)
 	bmi.bmiHeader.biWidth = width;
 	bmi.bmiHeader.biHeight = height; // Order pixels from top to bottom
 	bmi.bmiHeader.biPlanes = 1;
-	bmi.bmiHeader.biBitCount = 32; // last byte not used, 32 bit for alignment
+	bmi.bmiHeader.biBitCount = 32; 
 	bmi.bmiHeader.biCompression = BI_RGB;
 	bmi.bmiHeader.biSizeImage = 0;
 	bmi.bmiHeader.biXPelsPerMeter = 0;
@@ -48,14 +49,16 @@ void GameState::present()
 {
 	allCollisions = new RECT[100];
 	collisionLength = 0;
-	activeBackground->present(frontBuffer, allShowable, showableLength, NULL, allCollisions, collisionLength, backBuffer);
+	activeBackground->present(midBuffer, allShowable, showableLength, NULL, allCollisions, collisionLength, backBuffer);
+	std::clock_t time;
 	for (int aaa = 0; aaa < showableLength; aaa++)
 	{
-		allShowable[aaa]->update();
+		time = clock();
+		allShowable[aaa]->update(time);
 	}
 	for (int aaa = 0; aaa < showableLength; aaa++)
 	{
-		allShowable[aaa]->present(frontBuffer, aaa, allCollisions, collisionLength, backBuffer);
+		allShowable[aaa]->present(midBuffer, aaa, allCollisions, collisionLength, backBuffer);
 	}
 	POINT* tempNullPoints;
 	int tempNullPointsCount;
@@ -65,7 +68,7 @@ void GameState::present()
 		tempNullPointsCount = allShowable[aaa]->getMainImage()->getNullPointsCount();
 		for (int bbb = 0; bbb < tempNullPointsCount; bbb++)
 		{
-			frontBuffer[((tempNullPoints[bbb].y+allShowable[aaa]->getY())*width) + tempNullPoints[bbb].x+allShowable[aaa]->getX()] = activeBackground->getMainImage()->getColor(tempNullPoints[bbb].x+allShowable[aaa]->getX(), tempNullPoints[bbb].y+allShowable[aaa]->getY());
+			midBuffer[((tempNullPoints[bbb].y + allShowable[aaa]->getY())*width) + tempNullPoints[bbb].x + allShowable[aaa]->getX()] = activeBackground->getMainImage()->getColor(tempNullPoints[bbb].x + allShowable[aaa]->getX(), tempNullPoints[bbb].y + allShowable[aaa]->getY());
 		}
 	}
 	for (int iii = 0; iii < collisionLength; iii++)
@@ -76,11 +79,12 @@ void GameState::present()
 			{
 				if (backBuffer[xCur + (yCur*width)] != NULL)
 				{
-					frontBuffer[xCur + (yCur*width)] = backBuffer[xCur + (yCur*width)]->getColor(xCur, yCur);
+					midBuffer[xCur + (yCur*width)] = backBuffer[xCur + (yCur*width)]->getColor(xCur, yCur);
 				}
 			}
 		}
 	}
+	std::memcpy((void*)frontBuffer, (void*)midBuffer, (sizeof(pixel)*(width*height)));
 	std::memcpy((void*)backBuffer, (void*)nullBackBuffer, sizeof(Showable*)*width*height);
 	delete[] allCollisions;
 	collisionLength = 0;

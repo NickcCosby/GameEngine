@@ -1,5 +1,5 @@
 #include "Main.h"
-void Pathable::update()
+void Pathable::update(std::clock_t time)
 {
 	if (pathLength > 0)
 	{
@@ -26,7 +26,8 @@ void Pathable::update()
 		{
 			velocityY = -1 * absVelocityY;
 		}
-		if (abs(xDiff) <= abs(velocityX) && abs(yDiff) <= abs(velocityY))
+		Actor::update(time);
+		if (abs(xDiff) <= abs(deltaX) && abs(yDiff) <= abs(deltaY))
 		{
 			if (pathCurrent + 1 == pathLength)
 			{
@@ -53,8 +54,8 @@ void Pathable::update()
 	{
 		velocityX = 0;
 		velocityY = 0;
+		Actor::update(time);
 	}
-	Actor::update();
 }
 
 Pathable* Pathable::appendPath(POINT * addedPath, int pathCount)

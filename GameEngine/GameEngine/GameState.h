@@ -12,6 +12,7 @@ class GameState
 {
 private:
 	pixel *frontBuffer;
+	pixel *midBuffer;
 	Bitmap *allSprites;
 	int height;
 	int width;
