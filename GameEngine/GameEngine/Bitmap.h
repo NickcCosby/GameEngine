@@ -9,6 +9,12 @@ private:
 	POINT* nullPoints;
 	int nullPointsCount;
 public:
+	inline void addNullPoint(int x, int y)
+	{
+		nullPoints[nullPointsCount].x = x;
+		nullPoints[nullPointsCount].y = y;
+		nullPointsCount++;
+	}
 	inline POINT* Bitmap::getNullPoints()
 	{
 		return nullPoints;
@@ -46,6 +52,9 @@ public:
 	~Bitmap();
 	void setPixelColor(pixel tempColor, int x, int y);
 	Bitmap* createSubBitmap(RECT space);
+	Bitmap()
+	{
 
+	}
 };
 

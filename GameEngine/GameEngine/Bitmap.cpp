@@ -49,6 +49,8 @@ Bitmap::Bitmap(int givenWidth, int givenHeight)
 {
 	width = givenWidth;
 	height = givenHeight;
+	nullPoints = new POINT[width*height];
+	nullPointsCount = 0;
 	colors = new pixel[width*height];
 }
 
@@ -65,14 +67,18 @@ void Bitmap::setPixelColor(pixel tempColor, int x, int y)
 Bitmap* Bitmap::createSubBitmap(RECT space)
 {
 	int width, height;
-	height = space.bottom - space.top;
+	height = space.top - space.bottom;
 	width = space.right - space.left;
 	Bitmap *tempBitmap = new Bitmap(width, height);
-	for (int curHeight = space.top; curHeight <= space.bottom; curHeight++)
+	for (int curHeight = space.bottom; curHeight < space.top; curHeight++)
 	{
-		for (int curWidth = space.left; curWidth <= space.right; curWidth++)
+		for (int curWidth = space.left; curWidth < space.right; curWidth++)
 		{
-			tempBitmap->setPixelColor(this->getColor(curWidth, curHeight), curWidth - space.left, curHeight - space.top);
+			tempBitmap->setPixelColor(this->getColor(curWidth, curHeight), curWidth - space.left, curHeight - space.bottom);
+			if (this->getColor(curWidth, curHeight).b == 150 && this->getColor(curWidth, curHeight).g == 150 && this->getColor(curWidth, curHeight).r == 150)
+			{
+				tempBitmap->addNullPoint(curWidth - space.left, curHeight - space.bottom);
+			}
 		}
 	}
 	return tempBitmap;

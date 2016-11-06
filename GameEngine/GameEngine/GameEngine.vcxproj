@@ -116,6 +116,8 @@
     <ClInclude Include="Ai.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="Background.h" />
+    <ClInclude Include="Letter.h" />
+    <ClInclude Include="TextEngine.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="Pathable.h" />
     <ClInclude Include="Pawn.h" />
@@ -129,16 +131,19 @@
     <ClCompile Include="Bitmap.cpp" />
     <ClCompile Include="Ai.cpp" />
     <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="Letter.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Pathable.cpp" />
     <ClCompile Include="Pawn.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Showable.cpp" />
+    <ClCompile Include="TextEngine.cpp" />
     <ClCompile Include="Win32App.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="background.bmp" />
     <Image Include="Bullet.bmp" />
+    <Image Include="Letters.bmp" />
     <Image Include="RealEnemyShip.bmp" />
     <Image Include="realShip.bmp" />
   </ItemGroup>

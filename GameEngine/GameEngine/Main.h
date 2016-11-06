@@ -30,6 +30,8 @@ struct pixel {
 #include "Bitmap.h"
 #include "Win32App.h"
 #include "GameState.h"
+#include "Letter.h"
+#include "TextEngine.h"
 
 
 union KeyState

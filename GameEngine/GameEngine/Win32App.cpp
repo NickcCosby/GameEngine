@@ -76,6 +76,10 @@ LRESULT Win32App::realWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 				break;
 			case 0x52:
 				gameState->getPlayer()->inputReact('r');
+				break;
+			case 0x46:
+				gameState->showText();
+				break;
 			}
 		}
 		break;
@@ -128,7 +132,7 @@ Win32App::Win32App(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		"mainWindow",
 		"The title of my window",
 		WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, CW_USEDEFAULT, width, height,
+		0, 0, width, height,
 		NULL, NULL, hInstance, NULL);
 	SetWindowLongPtr(mainWindow, GWLP_USERDATA,LONG(this));
 	if (mainWindow == NULL)

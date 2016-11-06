@@ -1,6 +1,7 @@
 #pragma once
 #include "Pawn.h"
 #include "Pathable.h"
+#include "TextEngine.h"
 
 class Bitmap;
 class Showable;
@@ -26,6 +27,7 @@ private:
 	Ai* enemy;
 	RECT* allCollisions;
 	int collisionLength;
+	TextEngine* textEngine;
 public:
 	Pawn *getPlayer()
 	{
@@ -54,4 +56,5 @@ public:
 	GameState(int givenWidth, int givenHeight, HWND hwnd);
 	void present();
 	void cleanUp();
+	void showText();
 };

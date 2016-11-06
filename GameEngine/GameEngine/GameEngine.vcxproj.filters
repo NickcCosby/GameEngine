@@ -48,6 +48,12 @@
     <ClInclude Include="Ai.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TextEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Letter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -83,6 +89,12 @@
     <ClCompile Include="Ai.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TextEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Letter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="background.bmp">
@@ -95,6 +107,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="RealEnemyShip.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Letters.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
