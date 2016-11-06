@@ -29,6 +29,7 @@ private:
 	int collisionLength;
 	TextEngine* textEngine;
 public:
+	void startGame();
 	Pawn *getPlayer()
 	{
 		return player;

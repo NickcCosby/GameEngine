@@ -1,5 +1,16 @@
 #include "Main.h"
 
+void GameState::startGame()
+{
+	allSprites = new Bitmap("realShip.bmp");
+	Bitmap* enemySprite = new Bitmap("RealEnemyShip.bmp");
+	player = new Pawn((width / 2) + 50, height / 2, allSprites, allShowable, &showableLength, width, height);
+	enemy = new Ai(width / 2, height / 4, enemySprite, allShowable, &showableLength, width, height);
+	activeBackground = new Background("background.bmp", width, height);
+	Bitmap* letters = new Bitmap("Letters.bmp");
+	textEngine = new TextEngine(letters, allShowable, &showableLength, width, height);
+}
+
 GameState::GameState(int givenWidth, int givenHeight, HWND hwnd)
 {
 	width = givenWidth;
@@ -57,10 +68,6 @@ void GameState::present()
 	{
 		time = clock();
 		allShowable[aaa]->update(time);
-	}
-	if (showableLength > 3)
-	{
-		int jfkdsafdsa = 3132;
 	}
 	for (int aaa = 0; aaa < showableLength; aaa++)
 	{
