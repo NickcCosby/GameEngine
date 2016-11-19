@@ -115,8 +115,11 @@
     <ClInclude Include="Bitmap.h" />
     <ClInclude Include="Ai.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="ImageEngine.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="Letter.h" />
+    <ClInclude Include="ShipGame.h" />
+    <ClInclude Include="SingleScreenPuzzle.h" />
     <ClInclude Include="TextEngine.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="Pathable.h" />
@@ -124,6 +127,7 @@
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="Showable.h" />
     <ClInclude Include="Win32App.h" />
+    <ClInclude Include="Wire.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
@@ -131,21 +135,22 @@
     <ClCompile Include="Bitmap.cpp" />
     <ClCompile Include="Ai.cpp" />
     <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="ImageEngine.cpp" />
     <ClCompile Include="Letter.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Pathable.cpp" />
     <ClCompile Include="Pawn.cpp" />
     <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="ShipGame.cpp" />
     <ClCompile Include="Showable.cpp" />
+    <ClCompile Include="SingleScreenPuzzle.cpp" />
     <ClCompile Include="TextEngine.cpp" />
     <ClCompile Include="Win32App.cpp" />
+    <ClCompile Include="Wire.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="background.bmp" />
-    <Image Include="Bullet.bmp" />
-    <Image Include="Letters.bmp" />
-    <Image Include="RealEnemyShip.bmp" />
-    <Image Include="realShip.bmp" />
+    <Image Include="WireBoxBackground.bmp" />
+    <Image Include="Wires.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

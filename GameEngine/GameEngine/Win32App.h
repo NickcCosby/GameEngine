@@ -1,8 +1,11 @@
 #pragma once
+#include "GameState.h"
 
 class Bitmap;
 class Showable;
+class ImageEngine;
 class GameState;
+
 class Win32App
 {
 private:
@@ -33,9 +36,9 @@ public:
 	{
 		hDCMem = newHDC;
 	}
-	GameState *getGameState()
+	ImageEngine *getImageEngine()
 	{
-		return gameState;
+		return gameState->getImageEngine();
 	}
 	int getWidth()
 	{

@@ -10,17 +10,17 @@ DWORD WINAPI tickThreadProc(LPVOID lpParameter)
 	HDC hdc = GetDC(me->getMainWindow());
 	// Create DC with shared pixels to variable 'pixels'
 	me->setHDCMem(CreateCompatibleDC(hdc));
-	HBITMAP hbmOld = (HBITMAP)SelectObject(me->getHDCMem(), me->getGameState()->getHbmp());
+	HBITMAP hbmOld = (HBITMAP)SelectObject(me->getHDCMem(), me->getImageEngine()->getHbmp());
 	// Milliseconds to wait each frame
 	int delay = 1000 / 120;
 	while (true)
 	{
 		// Do stuff with pixels
-		me->getGameState()->present();
+		me->getImageEngine()->present();
 		// Draw pixels to window
 		BitBlt(hdc, 0, 0, me->getWidth(), me->getHeight(), me->getHDCMem(), 0, 0, SRCCOPY);
 		// Wait
-		me->getGameState()->cleanUp();
+		me->getImageEngine()->cleanUp();
 	}
 	SelectObject(me->getHDCMem(), hbmOld);
 	DeleteDC(hdc);
@@ -56,32 +56,10 @@ LRESULT Win32App::realWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		KeyState ks;
 		ks.lparam = lParam;
 		if (ks.nPrev == 0)
-		{
-			switch (wParam)
-			{
-			case 0x57:
-				gameState->getPlayer()->inputReact('w');  
-				break;
-			case 0x53:
-				gameState->getPlayer()->inputReact('s');
-				break;
-			case 0x41:
-				gameState->getPlayer()->inputReact('a');
-				break;
-			case 0x44:
-				gameState->getPlayer()->inputReact('d');
-				break;
-			case 0x20:
-				gameState->getPlayer()->inputReact(' ');
-				break;
-			case 0x52:
-				gameState->getPlayer()->inputReact('r');
-				break;
-			case 0x46:
-				gameState->showText();
-				break;
-			}
-		}
+			gameState->inputReact(wParam, true);
+		break;
+	case WM_KEYUP:
+		gameState->inputReact(wParam, false);
 		break;
 	case WM_TIMER:
 		UpdateWindow(hwnd);
@@ -94,6 +72,9 @@ LRESULT Win32App::realWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		break;
+	case WM_LBUTTONDOWN:
+		gameState->inputReact(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam), true);
+		break;
 	default:
 		return DefWindowProc(hwnd, msg, wParam, lParam);
 	}
@@ -105,7 +86,7 @@ Win32App::Win32App(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 {
 	width = 1600;
 	height = 900;
-	gameState = new GameState(width, height, mainWindow);
+	gameState = new ShipGame(this, width, height, mainWindow);
 	//Step 1: Registering the Window Class
 	wc.cbSize = sizeof(WNDCLASSEX);
 	wc.style = 0;
@@ -128,7 +109,7 @@ Win32App::Win32App(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 	// Step 2: Creating the Window
 	mainWindow = CreateWindowEx(
-		WS_EX_CLIENTEDGE,
+		NULL,
 		"mainWindow",
 		"The title of my window",
 		WS_OVERLAPPEDWINDOW,

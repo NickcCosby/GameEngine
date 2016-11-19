@@ -1,6 +1,14 @@
 #include "Main.h"
 #include <iterator>
 
+//still needs implementation... probably
+Bitmap * Bitmap::rotate(float angle)
+{
+	//Bitmap* tempBitmap;
+	//return tempBitmap;
+	return nullptr;
+}
+
 Bitmap::Bitmap(std::string location)
 {
 	std::ifstream input(location, std::ios::binary);

@@ -20,6 +20,7 @@ protected:
 	int* showableLength;
 	std::clock_t lastTime;
 public:
+	virtual void clicked(int x, int y, bool left);
 	virtual void update(std::clock_t time) = 0;
 	virtual void collide(Showable* otherShowable) = 0;
 	int getY()

@@ -1,6 +1,6 @@
 #include "Main.h"
 
-Ai::Ai(int startX, int startY, Bitmap * allSprites, Showable **& allShowable, int * showableLength, int width, int height) : Pathable(startX, startY, allSprites, allShowable, showableLength, width, height)
+Ai::Ai(int startX, int startY, Bitmap * allSprites, Showable ** allShowable, int * showableLength, int width, int height) : Pathable(startX, startY, allSprites, allShowable, showableLength, width, height)
 {
 	velocityTotal = 500;
 	loop = true;

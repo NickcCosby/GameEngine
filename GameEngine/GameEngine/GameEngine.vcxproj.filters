@@ -21,22 +21,25 @@
     <ClInclude Include="Win32App.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Actor.h">
+    <ClInclude Include="Pawn.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Showable.h">
+    <ClInclude Include="Actor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Bitmap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Pawn.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameState.h">
+    <ClInclude Include="Ai.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Background.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Letter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Pathable.h">
@@ -45,13 +48,22 @@
     <ClInclude Include="Projectile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Ai.h">
+    <ClInclude Include="Showable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TextEngine.h">
+    <ClInclude Include="Wire.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Letter.h">
+    <ClInclude Include="ImageEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ShipGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SingleScreenPuzzle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -68,9 +80,6 @@
     <ClCompile Include="Actor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Pawn.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -80,36 +89,42 @@
     <ClCompile Include="Showable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Ai.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Letter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Pathable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Projectile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Ai.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="TextEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Letter.cpp">
+    <ClCompile Include="Wire.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SingleScreenPuzzle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ShipGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="background.bmp">
+    <Image Include="WireBoxBackground.bmp">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="realShip.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Bullet.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RealEnemyShip.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Letters.bmp">
+    <Image Include="Wires.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

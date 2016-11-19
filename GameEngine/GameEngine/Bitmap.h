@@ -9,6 +9,7 @@ private:
 	POINT* nullPoints;
 	int nullPointsCount;
 public:
+	Bitmap* rotate(float angle);
 	inline void addNullPoint(int x, int y)
 	{
 		nullPoints[nullPointsCount].x = x;

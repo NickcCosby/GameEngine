@@ -1,5 +1,9 @@
 #include "Main.h"
 
+void Showable::clicked(int x, int y, bool left)
+{
+}
+
 Showable::Showable(int startX, int startY, Showable **& allShowableGiven, int * showableLengthGiven, int width, int height)
 {
 	allShowable = allShowableGiven;

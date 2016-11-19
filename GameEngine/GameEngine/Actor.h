@@ -1,5 +1,5 @@
 #pragma once
-#include "Main.h"
+#include "Showable.h"
 
 
 class Bitmap;

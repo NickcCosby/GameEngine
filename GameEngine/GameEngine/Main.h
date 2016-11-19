@@ -20,8 +20,10 @@ struct pixel {
 #include <stdlib.h>
 #include <math.h>
 #include <ctime>
+#include <windowsx.h>
 #include "Showable.h"
 #include "Actor.h"
+#include "Wire.h"
 #include "Pawn.h"
 #include "Pathable.h"
 #include "Projectile.h"
@@ -30,6 +32,9 @@ struct pixel {
 #include "Bitmap.h"
 #include "Win32App.h"
 #include "GameState.h"
+#include "ShipGame.h"
+#include "SingleScreenPuzzle.h"
+#include "ImageEngine.h"
 #include "Letter.h"
 #include "TextEngine.h"
 
@@ -50,8 +55,4 @@ union KeyState
 	};
 };
 
-namespace Path
-{
-
-};
 

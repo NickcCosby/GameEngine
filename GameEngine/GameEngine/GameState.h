@@ -1,61 +1,20 @@
 #pragma once
-#include "Pawn.h"
-#include "Pathable.h"
-#include "TextEngine.h"
+#include "ImageEngine.h"
 
-class Bitmap;
-class Showable;
-class Pawn;
-class Background;
-class Pathable;
+class Win32App;
 
 class GameState
 {
-private:
-	pixel *frontBuffer;
-	pixel *midBuffer;
-	Bitmap *allSprites;
-	int height;
-	int width;
-	Showable **backBuffer;
-	Showable **nullBackBuffer;
-	Showable ** allShowable;
-	Pawn *player;
-	int showableLength;
-	HBITMAP hbmp;
-	Background *activeBackground;
-	Ai* enemy;
-	RECT* allCollisions;
-	int collisionLength;
-	TextEngine* textEngine;
+protected:
+	Win32App* program;
+	ImageEngine* imageEngine;
 public:
-	void startGame();
-	Pawn *getPlayer()
+	GameState(Win32App* me, int width, int height, HWND hwnd);
+	GameState(Win32App* me, ImageEngine* givenImageEngine);
+	ImageEngine* getImageEngine()
 	{
-		return player;
+		return imageEngine;
 	}
-	pixel *getFrontBuffer()
-	{
-		return frontBuffer;
-	}
-	Showable ** getBackBuffer()
-	{
-		return backBuffer;
-	}
-	Showable **getAllShowable()
-	{
-		return allShowable;
-	}
-	int getShowableLength()
-	{
-		return showableLength;
-	}
-	HBITMAP getHbmp()
-	{
-		return hbmp;
-	}
-	GameState(int givenWidth, int givenHeight, HWND hwnd);
-	void present();
-	void cleanUp();
-	void showText();
+	virtual void inputReact(WPARAM keyPressed, bool down) = 0;
+	virtual void inputReact(int x, int y, bool left) = 0;
 };
