@@ -5,7 +5,7 @@
 
 class Bitmap;
 class Showable;
-class Pawn;
+class Ship;
 class Background;
 class Pathable;
 

@@ -86,7 +86,7 @@ Win32App::Win32App(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 {
 	width = 1600;
 	height = 900;
-	gameState = new ShipGame(this, width, height, mainWindow);
+	gameState = new RunningGameState(this, width, height, mainWindow);
 	//Step 1: Registering the Window Class
 	wc.cbSize = sizeof(WNDCLASSEX);
 	wc.style = 0;

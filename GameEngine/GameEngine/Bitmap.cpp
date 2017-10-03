@@ -25,12 +25,12 @@ Bitmap::Bitmap(std::string location)
 			fileContent[iii] -= 4294967040;
 		}
 	}
-	width = (fileContent[18]+fileContent[19]*pow(16, 2)+ fileContent[20]*pow(16,4) + fileContent[21]*pow(16,6));
-	height = (fileContent[22] + fileContent[23] * pow(16, 2) + fileContent[24] * pow(16, 4) + fileContent[25] * pow(16, 6));
+	width = (fileContent[18]+fileContent[19]*(int)pow(16, 2)+ fileContent[20]*(int)pow(16,4) + fileContent[21]*(int)pow(16,6));
+	height = (fileContent[22] + fileContent[23] * (int)pow(16, 2) + fileContent[24] * (int)pow(16, 4) + fileContent[25] * (int)pow(16, 6));
 	colors = new pixel[width*height];
 	nullPoints = new POINT[width*height];
 	nullPointsCount = 0;
-	int colorsLocation = (fileContent[10] + fileContent[11] * pow(16, 2) + fileContent[12] * pow(16, 4) + fileContent[13] * pow(16, 6));
+	int colorsLocation = (fileContent[10] + fileContent[11] * (int)pow(16, 2) + fileContent[12] * (int)pow(16, 4) + fileContent[13] * (int)pow(16, 6));
 	int tempLocation;
 	int colorsWritten = 0;
 	for (int bbb = height; bbb > 0; bbb--)
@@ -91,3 +91,40 @@ Bitmap* Bitmap::createSubBitmap(RECT space)
 	}
 	return tempBitmap;
 }
+
+/*Bitmap* Bitmap::scale(int newHeight, int newWidth)
+{
+	int deltaHeight;
+	int deltaWidth;
+	double increaseRatioHeight;
+	double increaseRatioWidth;
+	deltaHeight = abs(newHeight - height);
+	deltaWidth = abs(newWidth - width);
+	increaseRatioHeight = deltaHeight / height;
+	increaseRatioWidth = deltaWidth / width;
+	pixel *newColors;
+	height = newHeight;
+	width = newWidth;
+	newColors = new pixel[height*width];
+	int pixelsRemaining;
+	int pixelOffset;
+	pixel* tempPixel;
+	for (int iii = 0; iii < height; iii++)
+	{
+		for (int bbb = 0; bbb < width; bbb++)
+		{
+			tempPixel = &newColors[getArrayPos(bbb, iii)];
+			if (pixelsRemaining < 1)
+			{
+				(*tempPixel).r = ((colors[getArrayPos(bbb, iii)].r + colors[getArrayPos(bbb-1, iii-1)].r) / 2);
+				(*tempPixel).r = ((colors[getArrayPos(bbb, iii)].r + colors[getArrayPos(bbb-1, iii-1)].r) / 2);
+			}
+			else
+			{
+				*tempPixel = colors[getArrayPos(bbb, iii)];
+			}
+		}
+	}
+	return this;
+}
+*/

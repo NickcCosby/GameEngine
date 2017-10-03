@@ -8,6 +8,7 @@ class GameState
 protected:
 	Win32App* program;
 	ImageEngine* imageEngine;
+	Background* backGround;
 public:
 	GameState(Win32App* me, int width, int height, HWND hwnd);
 	GameState(Win32App* me, ImageEngine* givenImageEngine);

@@ -23,6 +23,7 @@ private:
 public:
 	Win32App(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		LPSTR lpCmdLine, int nCmdShow);
+
 	static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 	HWND getMainWindow()
 	{

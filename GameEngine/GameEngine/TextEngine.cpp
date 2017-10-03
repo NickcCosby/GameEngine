@@ -26,7 +26,7 @@ void TextEngine::ShowText(std::string givenText)
 	int nextX = 0;
 	int nextY = 160;
 	text = new Letter*[givenText.length()];
-	for (int iii = 0; iii < givenText.length(); iii++)
+	for (int iii = 0; (UINT)iii < givenText.length(); iii++)
 	{
 		switch (givenText[iii])
 		{

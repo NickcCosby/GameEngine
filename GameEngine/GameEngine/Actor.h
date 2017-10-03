@@ -8,14 +8,12 @@ class Showable;
 class Actor : public Showable
 {
 protected:
-	int velocityX;
-	int velocityY;
+	double velocityX;
+	double velocityY;
 	int deltaX;
 	int deltaY;
-	/* might want these
-	int accelerationX;
-	int accelerationY;
-	*/
+	double accelerationX;
+	double accelerationY;
 public:
 	Actor(int startX, int startY, Bitmap *allSprites, Showable **&allShowable, int *showableLength, int width, int height);
 	void update(std::clock_t time);

@@ -1,15 +1,4 @@
 #pragma once
-struct pixel {
-	union {
-		struct {
-			unsigned char b, g, r, a;
-		};
-		int val;
-	};
-	pixel() {
-		//val = 0;
-	}
-};
 
 #include <Windows.h>
 #include <string>
@@ -21,22 +10,10 @@ struct pixel {
 #include <math.h>
 #include <ctime>
 #include <windowsx.h>
-#include "Showable.h"
-#include "Actor.h"
-#include "Wire.h"
-#include "Pawn.h"
-#include "Pathable.h"
-#include "Projectile.h"
-#include "Ai.h"
-#include "Background.h"
-#include "Bitmap.h"
-#include "Win32App.h"
-#include "GameState.h"
-#include "ShipGame.h"
-#include "SingleScreenPuzzle.h"
-#include "ImageEngine.h"
-#include "Letter.h"
-#include "TextEngine.h"
+#include "EngineHeaders.h"
+#include "ShipGameHeaders.h"
+#include "RunningGameHeaders.h"
+
 
 
 union KeyState
@@ -56,3 +33,8 @@ union KeyState
 };
 
 
+#define getArrayPos(x,y) ((y*x)+x)
+
+template <typename T> int sgn(T val) {
+	return (T(0) < val) - (val < T(0));
+}

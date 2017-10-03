@@ -3,8 +3,8 @@
 ShipGame::ShipGame(Win32App * me, int width, int height, HWND hwnd) : GameState(me, width, height, hwnd)
 {
 	Bitmap* ship = new Bitmap("realShip.bmp");
-	player = new Pawn(width / 2, height / 2, ship, imageEngine->getAllShowable(), imageEngine->getShowableLengthPtr(), width, height);
-	Background* backGround = new Background("background.bmp", width, height);
+	player = new Ship(width / 2, height / 2, ship, imageEngine->getAllShowable(), imageEngine->getShowableLengthPtr(), width, height);
+	backGround = new Background("background.bmp", width, height);
 	Bitmap* enemySprite = new Bitmap("RealEnemyShip.bmp");
 	Ai* enemy = new Ai(width / 2, height / 4, enemySprite, imageEngine->getAllShowable(), imageEngine->getShowableLengthPtr(), width, height);
 	imageEngine->setActiveBackground(backGround);
@@ -27,7 +27,7 @@ void ShipGame::inputReact(WPARAM keyPressed, bool down)
 		player->inputReact('d', down);
 		break;
 	case 0x20:
-		player->inputReact('w', down);
+		player->inputReact(' ', down);
 		break;
 	case 0x52:
 		player->inputReact('r', down);

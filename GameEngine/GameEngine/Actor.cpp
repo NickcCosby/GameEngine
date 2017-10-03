@@ -14,9 +14,16 @@ void Actor::update(std::clock_t time)
 {
 	if (lastTime != 0)
 	{
+		double deltaVelocityX;
+		double deltaVelocityY;
 		double duration = (time - lastTime) / (double)CLOCKS_PER_SEC;
-		deltaX = velocityX * duration;
-		deltaY = velocityY * duration;
+		deltaVelocityX = (accelerationX * duration);
+		deltaVelocityY = (accelerationY * duration);
+		velocityX += deltaVelocityX;
+		velocityY += deltaVelocityY;
+		deltaX = (int)round(velocityX * duration);
+		deltaY = (int)round(velocityY * duration);
+
 		if (x + deltaX >= 0 && x + deltaX + mainImage->getWidth() < screenWidth)
 		{
 			x += deltaX;

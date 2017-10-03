@@ -131,4 +131,8 @@ void Showable::present(pixel* frontBuffer, int thisIndex, RECT* allCollisions, i
 	collisionCount = 0;
 }
 
+void Showable::scaleSprite(float scalePercentage)
+{
+}
+
 #include "Actor.h"

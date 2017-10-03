@@ -111,6 +111,7 @@ public:
 	{
  		allShowable = newAllShowable;
 	}
+	void scaleSprite(float scalePercentage);
 	Showable()
 	{
 

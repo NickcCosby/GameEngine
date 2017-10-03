@@ -1,4 +1,21 @@
 #pragma once
+#include <Windows.h>
+#include <string>
+#include <ctime>
+
+
+struct pixel {
+	union {
+		struct {
+			unsigned char b, g, r, a;
+		};
+		int val;
+	};
+	pixel() {
+		//val = 0;
+	}
+};
+
 
 class Bitmap
 {
@@ -53,6 +70,7 @@ public:
 	~Bitmap();
 	void setPixelColor(pixel tempColor, int x, int y);
 	Bitmap* createSubBitmap(RECT space);
+	Bitmap* scale(int newHeight, int newWidth);
 	Bitmap()
 	{
 

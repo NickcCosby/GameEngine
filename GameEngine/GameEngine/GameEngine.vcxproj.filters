@@ -13,118 +13,160 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Engine">
+      <UniqueIdentifier>{5859b195-0b16-4245-94c0-d2cc0972ca70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine">
+      <UniqueIdentifier>{84dbbf3d-0f7d-4000-8c45-1b8b48dd70b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ShipGame">
+      <UniqueIdentifier>{11634a46-8830-4b6a-bb62-2383d8e1a2bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ShipGame">
+      <UniqueIdentifier>{5b29c815-1623-4d7b-9180-a39975724bbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Showable">
+      <UniqueIdentifier>{e0e5c021-a1db-48f1-a320-6809bcc6fc06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Showable">
+      <UniqueIdentifier>{5af17e81-57e0-46fe-b131-f4c78c1cdb9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\RunningGame">
+      <UniqueIdentifier>{e05c3c33-4e82-432a-a9d9-2c07c8f18c2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RunningGame">
+      <UniqueIdentifier>{087e6ce6-b440-4fd9-bee4-a662acc70924}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Main.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32App.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Pawn.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Actor.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Background.h">
+      <Filter>Header Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="Bitmap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Ai.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Background.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Letter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TextEngine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Pathable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Projectile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Showable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Wire.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ImageEngine.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="GameState.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageEngine.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Main.h">
+      <Filter>Header Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="ShipGame.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\ShipGame</Filter>
     </ClInclude>
-    <ClInclude Include="SingleScreenPuzzle.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="TextEngine.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Win32App.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor.h">
+      <Filter>Header Files\Engine\Showable</Filter>
+    </ClInclude>
+    <ClInclude Include="Ai.h">
+      <Filter>Header Files\Engine\Showable</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Header Files\ShipGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Showable.h">
+      <Filter>Header Files\Engine\Showable</Filter>
+    </ClInclude>
+    <ClInclude Include="Letter.h">
+      <Filter>Header Files\Engine\Showable</Filter>
+    </ClInclude>
+    <ClInclude Include="Pathable.h">
+      <Filter>Header Files\Engine\Showable</Filter>
+    </ClInclude>
+    <ClInclude Include="RunningGameState.h">
+      <Filter>Header Files\RunningGame</Filter>
+    </ClInclude>
+    <ClInclude Include="RunnerPawn.h">
+      <Filter>Header Files\RunningGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Ship.h">
+      <Filter>Header Files\ShipGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Pawn.h">
+      <Filter>Header Files\Engine\Showable</Filter>
+    </ClInclude>
+    <ClInclude Include="ShipGameHeaders.h">
+      <Filter>Header Files\ShipGame</Filter>
+    </ClInclude>
+    <ClInclude Include="RunningGameHeaders.h">
+      <Filter>Header Files\RunningGame</Filter>
+    </ClInclude>
+    <ClInclude Include="ShowableHeaders.h">
+      <Filter>Header Files\Engine\Showable</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineHeaders.h">
+      <Filter>Header Files\Engine\Showable</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Win32App.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Background.cpp">
+      <Filter>Source Files\Engine</Filter>
     </ClCompile>
     <ClCompile Include="Bitmap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Actor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Pawn.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Background.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Showable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Ai.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Letter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Pathable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Projectile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TextEngine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Wire.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ImageEngine.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Engine</Filter>
     </ClCompile>
     <ClCompile Include="GameState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="SingleScreenPuzzle.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="ImageEngine.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Source Files\ShipGame</Filter>
     </ClCompile>
     <ClCompile Include="ShipGame.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\ShipGame</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEngine.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Win32App.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor.cpp">
+      <Filter>Source Files\Engine\Showable</Filter>
+    </ClCompile>
+    <ClCompile Include="Ai.cpp">
+      <Filter>Source Files\Engine\Showable</Filter>
+    </ClCompile>
+    <ClCompile Include="Showable.cpp">
+      <Filter>Source Files\Engine\Showable</Filter>
+    </ClCompile>
+    <ClCompile Include="Pathable.cpp">
+      <Filter>Source Files\Engine\Showable</Filter>
+    </ClCompile>
+    <ClCompile Include="Letter.cpp">
+      <Filter>Source Files\Engine\Showable</Filter>
+    </ClCompile>
+    <ClCompile Include="Ship.cpp">
+      <Filter>Source Files\ShipGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Pawn.cpp">
+      <Filter>Source Files\Engine\Showable</Filter>
+    </ClCompile>
+    <ClCompile Include="RunnerPawn.cpp">
+      <Filter>Source Files\RunningGame</Filter>
+    </ClCompile>
+    <ClCompile Include="RunningGameState.cpp">
+      <Filter>Source Files\RunningGame</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="WireBoxBackground.bmp">
+    <Image Include="Plate.bmp">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="Wires.bmp">
+    <Image Include="RunningGuy.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
