@@ -116,5 +116,9 @@ public:
 	{
 
 	}
+	virtual ~Showable()
+	{
+
+	}
 };
 

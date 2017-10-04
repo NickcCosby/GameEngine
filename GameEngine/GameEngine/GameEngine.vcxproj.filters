@@ -112,7 +112,7 @@
       <Filter>Header Files\Engine\Showable</Filter>
     </ClInclude>
     <ClInclude Include="RunnerEnemy.h">
-      <Filter>Source Files\RunningGame</Filter>
+      <Filter>Header Files\RunningGame</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -177,7 +177,7 @@
       <Filter>Source Files\Engine\Showable</Filter>
     </ClCompile>
     <ClCompile Include="RunnerEnemy.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\RunningGame</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

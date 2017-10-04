@@ -13,12 +13,9 @@ RunnerEnemy::RunnerEnemy(int startX, int startY, Bitmap *allSprites, Showable **
 
 void RunnerEnemy::pathEnd()
 {
-	x = 1600;
-	y = 0;
-	POINT tempPathPoint;
-	tempPathPoint.x = 0;
-	tempPathPoint.y = 0;
-	appendPath(tempPathPoint);
+	RunnerEnemy* replacement;
+	replacement = new RunnerEnemy(1600, 0, mainImage, allShowable, showableLength, screenWidth, screenHeight, collisionMap);
+	isDead = true;
 }
 
 
