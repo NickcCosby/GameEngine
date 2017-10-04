@@ -1,7 +1,6 @@
 #pragma once
 #include "GameState.h"
 #include "Pawn.h"
-#include "Ai.h"
 
 class ShipGame : public GameState
 {

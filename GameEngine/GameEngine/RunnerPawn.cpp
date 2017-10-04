@@ -1,9 +1,8 @@
 #include "Main.h"
 #define SHIFTED 0x8000
 
-RunnerPawn::RunnerPawn(int startX, int startY, Bitmap * allSprites, Showable ** allShowable, int * showableLength, int width, int height, Bitmap * CollisionMapGiven) : Pawn(startX, startY, allSprites, allShowable, showableLength, width, height)
+RunnerPawn::RunnerPawn(int startX, int startY, Bitmap * allSprites, Showable ** allShowable, int * showableLength, int width, int height, Bitmap * collisionMapGiven) : Pawn(startX, startY, allSprites, allShowable, showableLength, width, height), Runner(startX, startY, allSprites, allShowable, showableLength, width, height, collisionMapGiven), Actor(startX, startY, allSprites, allShowable, showableLength, width, height)
 {
-	collisionMap = CollisionMapGiven;
 	depth = .75;
 }
 
@@ -34,46 +33,11 @@ void RunnerPawn::inputReact(char input, bool down)
 	}
 }
 
-void RunnerPawn::setInAir(bool inAirGiven)
-{
-	inAir = inAirGiven;
-	if (inAir)
-	{
-		accelerationY = -500;
-		//set x/y moving velocity to diff
-	}
-	else
-	{
-		accelerationY = 0;
-		velocityY = 0;
-	}
-}
+
 
 void RunnerPawn::update(std::clock_t time)
 {
-	//falling/ground collision
-	{
-		int whiteColor = 765;
-		//check for all on bottom row
-		for (int iii = x; iii < mainImage->getWidth() + x; iii++)
-		{
-			//if bottom row is in collision go 1 above
-			if (collisionMap->getColor(iii, y).r + collisionMap->getColor(iii, y).g + collisionMap->getColor(iii, y).b != whiteColor)
-			{
-				do
-				{
-					y++;
-				} while (collisionMap->getColor(iii, y).r + collisionMap->getColor(iii, y).g + collisionMap->getColor(iii, y).b != whiteColor);
-				setInAir(false);
-				iii = x;
-			}
-			//if bottom row is not 1 above collision, fall
-			else if (collisionMap->getColor(iii, y - 2).r + collisionMap->getColor(iii, y - 2).g + collisionMap->getColor(iii, y - 2).b == whiteColor)
-			{
-				setInAir(true);
-			}
-		}
-	}
+	fall();
 	//movement
 	{
 		if (buttons.a == true)
@@ -82,7 +46,7 @@ void RunnerPawn::update(std::clock_t time)
 			{
 				lastPressedButtons.a = time;
 			}
-			velocityX = (int)-(1 / (2 * ((time - lastPressedButtons.d) / (double)CLOCKS_PER_SEC) + .02)) - 200;
+			velocityX = (int)-(1 / (2 * (-(time - lastPressedButtons.d) / (double)CLOCKS_PER_SEC) + .02)) - 200;
 		}
 		if (buttons.a == false && lastPressedButtons.a != 0)
 		{
@@ -105,8 +69,19 @@ void RunnerPawn::update(std::clock_t time)
 		}
 		if (buttons.space == true)
 		{
-			setInAir(true);
-			velocityY = 300;
+			if (lastPressedButtons.space == 0)
+			{
+				lastPressedButtons.space = time;
+				if (!inAir)
+				{
+					setInAir(true);
+					velocityY = 300;
+				}
+			}
+		}
+		if (buttons.space == false)
+		{
+			lastPressedButtons.space = 0;
 		}
 	}
 	//reset buttons 

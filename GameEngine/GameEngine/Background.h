@@ -17,9 +17,4 @@ public:
 	{
 		return mainImage;
 	}
-	~Background()
-	{
-		delete mainImage;
-		delete fullImage;
-	}
 };

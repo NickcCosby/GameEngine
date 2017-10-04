@@ -5,7 +5,9 @@ RunningGameState::RunningGameState(Win32App * me, int width, int height, HWND hw
 	collisionMap = new Bitmap("Plate.bmp");
 	backGround = new Background("Plate.bmp", width, height);
 	Bitmap* runnerImage = new Bitmap("Allied Ship.bmp");
+	Bitmap* enemyImage = new Bitmap("RealEnemyShip.bmp");
 	runner = new RunnerPawn(width / 2, height / 2 + 100, runnerImage, imageEngine->getAllShowable(), imageEngine->getShowableLengthPtr(), width, height, collisionMap);
+	enemy = new RunnerEnemy(1600, 0, enemyImage, imageEngine->getAllShowable(), imageEngine->getShowableLengthPtr(), width, height, collisionMap);
 	imageEngine->setActiveBackground(backGround);
 }
 

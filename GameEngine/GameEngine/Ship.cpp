@@ -1,6 +1,6 @@
 #include "Main.h"
 
-Ship::Ship(int startX, int startY, Bitmap *allSprites, Showable **allShowable, int *showableLength, int width, int height) : Pawn(startX, startY, allSprites, allShowable, showableLength, width, height)
+Ship::Ship(int startX, int startY, Bitmap *allSprites, Showable **allShowable, int *showableLength, int width, int height) : Pawn(startX, startY, allSprites, allShowable, showableLength, width, height), Actor(startX, startY, allSprites, allShowable, showableLength, width, height)
 {
 	depth = .75;
 	bulletImage = new Bitmap("Bullet.bmp");
@@ -42,7 +42,7 @@ void Ship::inputReact(char input, bool down)
 			break;
 		case 'r':
 			Bitmap* enemySprite = new Bitmap("RealEnemyShip.bmp");
-			Ai *enemy = new Ai(screenWidth / 2, screenHeight / 4, enemySprite, allShowable, showableLength, screenWidth, screenHeight);
+			EnemyShip *enemy = new EnemyShip(screenWidth / 2, screenHeight / 4, enemySprite, allShowable, showableLength, screenWidth, screenHeight);
 			break;
 		}
 	}

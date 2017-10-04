@@ -19,7 +19,7 @@ struct lastPressedButtons
 };
 
 
-class Pawn : public Actor
+class Pawn : virtual public Actor
 {
 protected:
 	buttons buttons;
@@ -28,10 +28,6 @@ public:
 	Pawn(int startX, int startY, Bitmap *allSprites, Showable **allShowable, int *showableLength, int width, int height);
 	virtual void collide(Showable *otherShowable) = 0;
 	virtual void inputReact(char input, bool down) = 0;
-	~Pawn()
-	{
-		delete mainImage;
-	}
 	void addCollisions(RECT collisionRECT)
 	{
 

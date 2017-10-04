@@ -17,10 +17,6 @@ protected:
 public:
 	Actor(int startX, int startY, Bitmap *allSprites, Showable **&allShowable, int *showableLength, int width, int height);
 	void update(std::clock_t time);
-	~Actor()
-	{
-		delete mainImage;
-	}
 };
 
 #include "Pawn.h"

@@ -1,7 +1,7 @@
 #pragma once
 #include "Actor.h"
 
-class Pathable : public Actor
+class Pathable : virtual public Actor
 {
 protected:
 	POINT* path;
@@ -15,4 +15,5 @@ public:
 	void update(std::clock_t time);
 	Pathable* appendPath(POINT* addedPath, int pathCount);
 	Pathable* appendPath(POINT addedPath);
+	virtual void pathEnd() = 0;
 };

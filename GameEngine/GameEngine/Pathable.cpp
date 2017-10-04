@@ -42,6 +42,7 @@ void Pathable::update(std::clock_t time)
 					path = new POINT[100];
 					pathCurrent = 0;
 					pathLength = 0;
+					pathEnd();
 				}
 			}
 			else

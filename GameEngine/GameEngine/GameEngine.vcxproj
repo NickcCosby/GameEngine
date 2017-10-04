@@ -113,13 +113,16 @@
   <ItemGroup>
     <ClInclude Include="Actor.h" />
     <ClInclude Include="Bitmap.h" />
-    <ClInclude Include="Ai.h" />
+    <ClInclude Include="EnemyShip.h" />
     <ClInclude Include="EngineHeaders.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="ImageEngine.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="Letter.h" />
     <ClInclude Include="Pawn.h" />
+    <ClInclude Include="Runner.h" />
+    <ClInclude Include="RunnerEnemy.h" />
+    <ClInclude Include="RunnerPathable.h" />
     <ClInclude Include="RunnerPawn.h" />
     <ClInclude Include="RunningGameHeaders.h" />
     <ClInclude Include="RunningGameState.h" />
@@ -138,13 +141,16 @@
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Bitmap.cpp" />
-    <ClCompile Include="Ai.cpp" />
+    <ClCompile Include="EnemyShip.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="ImageEngine.cpp" />
     <ClCompile Include="Letter.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Pathable.cpp" />
     <ClCompile Include="Pawn.cpp" />
+    <ClCompile Include="Runner.cpp" />
+    <ClCompile Include="RunnerEnemy.cpp" />
+    <ClCompile Include="RunnerPathable.cpp" />
     <ClCompile Include="RunnerPawn.cpp" />
     <ClCompile Include="RunningGameState.cpp" />
     <ClCompile Include="Ship.cpp" />
