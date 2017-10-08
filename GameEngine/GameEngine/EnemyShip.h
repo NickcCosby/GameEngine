@@ -14,4 +14,7 @@ public:
 	{
 
 	}
+private:
+	void animationSetUp(Bitmap* allSprites);
+
 };

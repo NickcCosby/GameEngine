@@ -4,6 +4,29 @@ void Showable::clicked(int x, int y, bool left)
 {
 }
 
+void Showable::update(std::clock_t time)
+{
+	//if frame change is required
+	double duration = (time - lastFrameChange) / (double)CLOCKS_PER_SEC;
+	if (duration*1000 > frameLength[activeAnimation][activeFrame])
+	{
+		//if animation is over
+		if (activeFrame + 2 > animationLength[activeAnimation])
+		{
+			(*this.*animationEnd[activeAnimation])();
+			lastFrameChange = time;
+			mainImage = animationTracks[activeAnimation][activeFrame];
+
+		}
+		else //next frame
+		{
+			activeFrame++;
+			lastFrameChange = time;
+			mainImage = animationTracks[activeAnimation][activeFrame];
+		}
+	}
+}
+
 Showable::Showable(int startX, int startY, Showable **& allShowableGiven, int * showableLengthGiven, int width, int height)
 {
 	allShowable = allShowableGiven;
@@ -12,31 +35,14 @@ Showable::Showable(int startX, int startY, Showable **& allShowableGiven, int * 
 	(*showableLength)++;
 	screenWidth = width;
 	screenHeight = height;
-	collisions = new RECT[100];
+	collisions = new RECT[15];
 	collisionCount = 0;
 	x = startX;
 	y = startY;
+	lastTime = clock();
+	lastFrameChange = clock();
 }
 
-int Showable::paint(Showable ** backBuffer)
-{
-	for (int iii = y; iii < mainImage->getHeight() + y && iii < screenHeight; iii++)
-	{
-		for (int bbb = x; bbb < mainImage->getWidth() + x && bbb < screenWidth; bbb++)
-		{
-			if (backBuffer[bbb + (iii*screenWidth)] == NULL)
-				backBuffer[bbb + (iii*screenWidth)] = this;
-			else
-			{
-				if (backBuffer[bbb + (iii*screenWidth)]->getDepth() < depth)
-				{
-					backBuffer[bbb + (iii*screenWidth)] = this;
-				}
-			}
-		}
-	}
-	return 0;
-}
 
 void Showable::present(pixel* frontBuffer, int thisIndex, RECT* allCollisions, int &allCollisionsLength, Showable** backBuffer)
 {
@@ -133,6 +139,12 @@ void Showable::present(pixel* frontBuffer, int thisIndex, RECT* allCollisions, i
 
 void Showable::scaleSprite(float scalePercentage)
 {
+}
+
+void Showable::changeAnimation(int animation)
+{
+	activeAnimation = animation;
+	activeFrame = 0;
 }
 
 #include "Actor.h"

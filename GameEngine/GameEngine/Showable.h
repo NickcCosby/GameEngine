@@ -1,8 +1,14 @@
 
 #pragma once
 #include "Bitmap.h"
+#define IDLE_ANIMATION 0
+
 
 class Bitmap;
+class Showable;
+typedef void(Showable::*animationEndType)();
+
+
 
 class Showable
 {
@@ -11,6 +17,11 @@ protected:
 	int y;
 	Bitmap *mainImage;
 	double depth;
+	Bitmap ***animationTracks;
+	int *animationLength;
+	int **frameLength;
+	int activeAnimation;
+	int activeFrame;
 	bool isDead = 0;
 	int screenWidth;
 	int screenHeight;
@@ -19,9 +30,13 @@ protected:
 	Showable **allShowable;
 	int* showableLength;
 	std::clock_t lastTime;
+	std::clock_t lastFrameChange;
+	//void (Showable::**animationEnd)();
+	animationEndType *animationEnd;
+
 public:
 	virtual void clicked(int x, int y, bool left);
-	virtual void update(std::clock_t time) = 0;
+	virtual void update(std::clock_t time);
 	virtual void collide(Showable* otherShowable) = 0;
 	int getY()
 	{
@@ -50,7 +65,6 @@ public:
 		return mainImage->getColor(bitmapX, bitmapY);
 	}
 	Showable(int startX, int startY, Showable **& allShowable, int * showableLength, int width, int height);
-	int paint(Showable** backBuffer);
 	void present(pixel* frontBuffer, int thisIndex, RECT* allCollisions, int &allCollisionsLength, Showable** backBuffer);
 	RECT* getRect()
 	{
@@ -93,8 +107,8 @@ public:
 			tempPoint.x = 0;
 			tempPoint.y = 0;
 		}
-	return tempPoint;
-}
+		return tempPoint;
+	}
 	bool rectCollide(RECT otherRECT)
 	{
 		RECT *myRECT = getRect();
@@ -109,7 +123,7 @@ public:
 	}
 	void setAllShowable(Showable** newAllShowable)
 	{
- 		allShowable = newAllShowable;
+		allShowable = newAllShowable;
 	}
 	void scaleSprite(float scalePercentage);
 	Showable()
@@ -120,5 +134,10 @@ public:
 	{
 
 	}
+	void animationEndLoop()
+	{
+		activeFrame = 0;
+	}
+	void changeAnimation(int animation);
 };
 

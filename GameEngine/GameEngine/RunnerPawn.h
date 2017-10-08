@@ -3,6 +3,8 @@
 
 class RunnerPawn : public Pawn, public Runner
 {
+private:
+	void animationSetUp(Bitmap* allSprites);
 protected:
 	
 public:

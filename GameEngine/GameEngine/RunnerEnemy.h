@@ -11,6 +11,8 @@ private:
 	{ 
 
 	}
+	void animationSetUp(Bitmap* allSprites);
+
 protected:
 
 };

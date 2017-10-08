@@ -15,7 +15,6 @@
 #include "RunningGameHeaders.h"
 
 
-
 union KeyState
 {
 	LPARAM lparam;

@@ -12,6 +12,8 @@ EnemyShip::EnemyShip(int startX, int startY, Bitmap * allSprites, Showable ** al
 		tempPointArray[iii].y = abs(rand() % screenHeight-mainImage->getHeight());
 	}
 	appendPath(tempPointArray, 10);
+	animationSetUp(allSprites);
+
 }
 
 void EnemyShip::collide(Showable * otherShowable)
@@ -20,4 +22,20 @@ void EnemyShip::collide(Showable * otherShowable)
 	{
 		isDead = true;
 	}
+}
+
+void EnemyShip::animationSetUp(Bitmap * allSprites)
+{
+	animationTracks = new Bitmap**[1];
+	animationTracks[0] = new Bitmap*[1];
+	animationTracks[0][0] = allSprites;
+	animationLength = new int[1];
+	animationLength[0] = 1;
+	frameLength = new int*[1];
+	frameLength[0] = new int[1];
+	frameLength[0][0] = 100;
+	activeAnimation = IDLE_ANIMATION;
+	activeFrame = 0;
+	animationEnd = new animationEndType[1];
+	animationEnd[0] = &Showable::animationEndLoop;
 }

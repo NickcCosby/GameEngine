@@ -9,6 +9,8 @@ RunnerEnemy::RunnerEnemy(int startX, int startY, Bitmap *allSprites, Showable **
 	tempPathPoint.x = 0;
 	tempPathPoint.y = 0;
 	appendPath(tempPathPoint);
+	animationSetUp(allSprites);
+
 }
 
 void RunnerEnemy::pathEnd()
@@ -19,4 +21,19 @@ void RunnerEnemy::pathEnd()
 }
 
 
-
+void RunnerEnemy::animationSetUp(Bitmap * allSprites)
+{
+	animationTracks = new Bitmap**[1];
+	animationTracks[0] = new Bitmap*[1];
+	animationTracks[0][0] = allSprites;
+	animationLength = new int[1];
+	animationLength[0] = 1;
+	frameLength = new int*[1];
+	frameLength[0] = new int[1];
+	frameLength[0][0] = 100;
+	activeAnimation = IDLE_ANIMATION;
+	activeFrame = 0;
+	animationEnd = new animationEndType[1];
+	animationEnd[0] = &Showable::animationEndLoop;
+	mainImage = animationTracks[IDLE_ANIMATION][0];
+}
