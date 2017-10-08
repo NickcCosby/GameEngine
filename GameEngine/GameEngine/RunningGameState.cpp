@@ -2,6 +2,7 @@
 
 RunningGameState::RunningGameState(Win32App * me, int width, int height, HWND hwnd) : GameState(me, width, height, hwnd)
 {
+	//Bitmap* whoCare = new Bitmap("superTest.bmp");
 	collisionMap = new Bitmap("Plate.bmp");
 	backGround = new Background("Plate.bmp", width, height);
 	Bitmap* runnerImage = new Bitmap("RunnerGuy.bmp");

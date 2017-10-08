@@ -17,8 +17,8 @@ ImageEngine::ImageEngine(int givenWidth, int givenHeight, HWND hwnd)
 	}
 	allShowable = new Showable*[100];
 	showableLength = 0;
-	Bitmap* letters = new Bitmap("Letters.bmp");
-	textEngine = new TextEngine(letters, allShowable, &showableLength, width, height);
+	//Bitmap* letters = new Bitmap("Letters.bmp");
+	//textEngine = new TextEngine(letters, allShowable, &showableLength, width, height);
 	BITMAPINFO bmi;
 	bmi.bmiHeader.biSize = sizeof(BITMAPINFO);
 	bmi.bmiHeader.biWidth = width;

@@ -11,20 +11,15 @@ Bitmap * Bitmap::rotate(float angle)
 
 Bitmap::Bitmap(std::string location)
 {
-	std::ifstream input(location, std::ios::binary);
+	std::ifstream input(location, std::ios::in | std::ios::binary | std::ios::ate);
 	// copies all data into buffer
 	if (_heapchk() != _HEAPOK)
 		DebugBreak();
-	std::vector<UINT> vectorBuffer((std::istreambuf_iterator<char>(input)), (std::istreambuf_iterator<char>()));
-	UINT *fileContent = new UINT[vectorBuffer.size()];
-	for (UINT iii = 0; iii < vectorBuffer.size(); iii++)
-	{
-		fileContent[iii] = (UINT)vectorBuffer[iii];
-		if (fileContent[iii] > 255)
-		{
-			fileContent[iii] -= 4294967040;
-		}
-	}
+	int size = input.tellg();
+	input.seekg(0, std::ios::beg);
+	unsigned char *fileContent = new unsigned char[size];
+	input.read((char*)fileContent, size);
+	input.close();
 	width = (fileContent[18]+fileContent[19]*(int)pow(16, 2)+ fileContent[20]*(int)pow(16,4) + fileContent[21]*(int)pow(16,6));
 	height = (fileContent[22] + fileContent[23] * (int)pow(16, 2) + fileContent[24] * (int)pow(16, 4) + fileContent[25] * (int)pow(16, 6));
 	colors = new pixel[width*height];
@@ -51,6 +46,7 @@ Bitmap::Bitmap(std::string location)
 			colorsWritten++;
 		}
 	}
+	delete[] fileContent;
 }
 
 Bitmap::Bitmap(int givenWidth, int givenHeight)
